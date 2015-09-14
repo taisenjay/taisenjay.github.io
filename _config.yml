@@ -26,9 +26,9 @@ kramdown:
 
 # Site owner
 owner:
-  name: Your Name
+  name: Taisenjay
   avatar: bio-photo.jpg
-  bio: "Describe your self."
+  bio: "恶魔逼近"
   email:
   disqus-shortname:
   twitter: #username
@@ -53,7 +53,7 @@ owner:
   dribbble: #username
   youtube: #username
   soundcloud: #username
-  weibo: #username
+  weibo: #WhoIsHandsome
   flickr: #username
   codepen: #username
 
