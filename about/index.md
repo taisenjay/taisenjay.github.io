@@ -13,6 +13,9 @@ image:
 一个爱小说爱运动，好久没运动没时间看小说代码敲的肩膀好酸的伪文艺蛋疼青年。正在通
 往优秀Android开发者的路上缓缓前行…………（ps:jekyll不会用啊,正在苦逼摸索中……）
 
+时间紧张，有空再搭建
+………………
+
 ## About Minimal Mistakes :
 
 * Responsive templates. Looking good on mobile, tablet, and desktop.
