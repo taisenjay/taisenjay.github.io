@@ -1,10 +1,10 @@
 # Site navigation links
 
-- title: 关于
+- title: About Me
   url: /about/
 
-- title: 所有BLOG
+- title: All BLOG
   url: /posts/
 
-- title: 杂记
+- title: Fragment
   url: /theme-setup/
