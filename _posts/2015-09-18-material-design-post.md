@@ -53,7 +53,7 @@ If you are creating a new app with material design features, the material design
 ##应用Material主题
 在你的app中使用Material主题，需要你指定一个主题继承`android:Theme.Material:`
 
-```xml
+{% highlight xml %}
 
 		<!-- res/values/styles.xml -->
  		<!-- res/values/styles.xml -->
@@ -63,7 +63,7 @@ If you are creating a new app with material design features, the material design
     		<!-- theme customizations -->
   			</style>
 	    </resources>
-```
+{% endhighlight %}
 
 ##设计布局（layouts）
 除了应用和自定义material主题外，你还应该遵从material design guideline设计布局，
@@ -78,7 +78,7 @@ If you are creating a new app with material design features, the material design
 ##为你的Views指定elevation
 视图（view）可以投射阴影（shadow），而elevation值得大小就决定了其阴影大小和画阴影的顺序，在你的layout中用`android:elevation`实现
 
-```xml
+{% highlight xml %}
 
 	<TextView
     	android:id="@+id/my_textview"
@@ -87,14 +87,14 @@ If you are creating a new app with material design features, the material design
    	 	android:text="@string/next"
     	android:background="@color/white"
     	android:elevation="5dp" />
-```
+{% endhighlight  %}
 
 新属性`translationZ`可以让你创建出暂时改变view的elevation大小的动画（animation）,显然这在触摸回应时非常有用
 
 ##创建lists和cards
 Recycleview是listview的一个进化版本，它是一个强大的滑动组件，与经典的ListView相比，同样拥有item回收复用的功能，但是直接把viewholder的实现封装起来，用户只要实现自己的viewholder就可以了，该组件会自动帮你回收复用每一个item。它不但变得更精简，也变得更加容易使用，而且更容易组合设计出自己需要的滑动布局。普遍认为其将来能替代listview。（介绍那么多说明比较重要）cardview可以让你用类似卡片的形式进行信息展示，在不同的app上拥有了一致相似的外观。下面向你展示cardview在layout中的使用
 
-```xml
+{% highlight xml %}
 
 	<android.support.v7.widget.CardView
     	android:id="@+id/card_view"
@@ -102,12 +102,12 @@ Recycleview是listview的一个进化版本，它是一个强大的滑动组件�
     	android:layout_height="200dp"
     	card_view:cardCornerRadius="3dp">
 	</android.support.v7.widget.CardView>
-```
+{% endhighlight %}
 
 ##自定义动画
 Android5.0包括了新的API用来自定义动画。比如你可以在一个activity内激活activity过度动画和定义退出动画。示例如下
 
-```java
+{% highlight java %}
 
 		public class MyActivity extends Activity {
 
@@ -127,7 +127,7 @@ Android5.0包括了新的API用来自定义动画。比如你可以在一个acti
                           	.makeSceneTransitionAnimation(this).toBundle());
     		}
 		}
-```
+{% endhighlight %}
 
 当你从此activity开启另一个activity时，退出动画即被激活
 
