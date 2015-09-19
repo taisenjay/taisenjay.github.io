@@ -179,13 +179,27 @@ Material主题定义如下
 		</resources>
 {% endhighlight %}
 
+
+
+###自定义StatusBar
+
 ![Smithsonian Image]({{site.url}}/images/ThemeColors.png)
 {: .image-pull-right}
 
-###自定义StatusBar
 material主题让你非常简单的自定义statusbar,你可以指定一个适合你品牌的颜色并且提供足够的对比来显示白色的status图标.为statusbar自定义颜色，你应该在继承material主题的时候使用`android:statusBarColor`参数，`android:statusBarColor` 默认继承`android:colorPrimaryDark`的值。
+你也可以在statusbar后台自己绘制。比如，如果你想让statusbar在一张图片上透明的显示，用一种精细的渐变暗来保证白色的status图标可见。为了达到这种效果，需要将`android:statusBarColor`参数设为`@android:color/transparent`。你也可以为了动画（animation）和褪色（fading）使用
+` Window.setStatusBarColor()`方法。
 
+>注意：statusbar几乎永远要有一个清晰的来自主要工具栏（primary toolbar）的描述，除非你想要>在这些bars后面展示丰富的边到边影像或者多媒体内容并且你用一个梯度渐变来使这些图标依然可见。
 
+当你自定义status和navigation bars时，使他们一起保持透明或者只修改status bar,navigation 
+ bar在其他所有情况下都应该保持黑色。
+
+###个人主题视图
+
+在XML布局中定义元素可以指定`android:theme`参数，也就是一个指向主题资源的参数。这个参数为元素和各个子元素修改主题，这在一个界面的特定部分需要变更主题调色板时很有用。
+
+##未完待续
 
 
 
