@@ -156,6 +156,35 @@ Material主题定义如下
 	<figcaption>图1.dark material theme,图2.light material theme</figcaption>
 </figure>
 
+>注意：material主题只有Android5.0（API21）以上支持。` v7 Support Libraries`为一些控件
+>提供material design style的一些主题，以及对自定义调色板提供支持。
+
+###自定义调色板（color palette）
+自定义主题的基础颜色来搭配你的品牌，当你继承material主题时，你应该用主题参数来自定义颜色。
+示例如下
+
+{% highlight xml %}
+
+		<resources>
+  			<!-- inherit from the material theme -->
+  			<style name="AppTheme" parent="android:Theme.Material">
+    			<!-- Main theme colors -->
+    			<!--   your app branding color for the app bar -->
+    			<item name="android:colorPrimary">@color/primary</item>
+    			<!--   darker variant for the status bar and contextual app bars -->
+    			<item name="android:colorPrimaryDark">@color/primary_dark</item>
+    			<!--   theme UI controls like checkboxes and text fields -->
+    			<item name="android:colorAccent">@color/accent</item>
+  			</style>
+		</resources>
+{% endhighlight %}
+
+![Smithsonian Image]({{site.url}}/images/ThemeColors.png)
+{: .image-pull-right}
+
+###自定义StatusBar
+material主题让你非常简单的自定义statusbar,你可以指定一个适合你品牌的颜色并且提供足够的对比来显示白色的status图标.为statusbar自定义颜色，你应该在继承material主题的时候使用`android:statusBarColor`参数，`android:statusBarColor` 默认继承`android:colorPrimaryDark`的值。
+
 
 
 
