@@ -152,7 +152,7 @@ Material主题定义如下
 
 <figure class="half">
 	<a href="/images/MaterialDark.png"><img src="/images/MaterialDark.png"></a>
-    <a href="/images/MaterialLight.jpg"><img src="/images/MaterialLight.jpg"></a>
+    <a href="/images/MaterialLight.png"><img src="/images/MaterialLight.png"></a>
 	<figcaption>图1.dark material theme,图2.light material theme</figcaption>
 </figure>
 
