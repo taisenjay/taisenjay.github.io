@@ -220,7 +220,7 @@ RecyclerView通过提供以下两点来简化展示和大数据处理
 
 使用RecyclerView你必须为其指定一个adapter和layout manager,继承RecyclerView.adapter这个类来创建adapter。实现的细节取决于你的数据集（dataset）和视图（views）种类的细节。想要了解更多，请看下面的例子
 
-##未完待续
+##未完待续（最近真忙）
 
 
 
