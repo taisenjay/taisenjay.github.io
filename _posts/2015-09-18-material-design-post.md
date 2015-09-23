@@ -199,8 +199,28 @@ material主题让你非常简单的自定义statusbar,你可以指定一个适�
 
 在XML布局中定义元素可以指定`android:theme`参数，也就是一个指向主题资源的参数。这个参数为元素和各个子元素修改主题，这在一个界面的特定部分需要变更主题调色板时很有用。
 
-##未完待续，有空再写
+##创建Lists和Cards
+想要在你的app中应用mterial design风格创建lists和cards,你可以使用RecyclerView和CardView组件。
 
+###创建Lists
+
+RecyclerView组件是ListView的一个更高级更灵活的版本，这个组件是一个大数据集的容器，它在维护有限的views时可以非常高效的滚动。当你需要展示拥有在运行时基于用户操作和网络活动的元素的数据集时，你应该使用RecyclerView。
+
+RecyclerView通过提供以下两点来简化展示和大数据处理
+
+- 为安放条目（items）的layoutmanager
+- 为常用的条目操作准备好的默认动画，比如移除条目或是添加条目
+
+在使用RecyclerView组件式时，你同样拥有自定义layout managers和动画的灵活性
+
+<figure>
+	<img src="/images/RecyclerView.png">
+	<figcaption>图1.RecyclerView</figcaption>
+</figure>
+
+使用RecyclerView你必须为其指定一个adapter和layout manager,继承RecyclerView.adapter这个类来创建adapter。实现的细节取决于你的数据集（dataset）和视图（views）种类的细节。想要了解更多，请看下面的例子
+
+##未完待续
 
 
 
