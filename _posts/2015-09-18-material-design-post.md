@@ -220,7 +220,123 @@ RecyclerView通过提供以下两点来简化展示和大数据处理
 
 使用RecyclerView你必须为其指定一个adapter和layout manager,继承RecyclerView.adapter这个类来创建adapter。实现的细节取决于你的数据集（dataset）和视图（views）种类的细节。想要了解更多，请看下面的例子
 
-##未完待续（busy^^^）
+![Smithsonian Image]({{site.url}}/images/list_mail.png)
+{: .image-pull-right}
+
+layout manager在RecycleView中定位item views，并且决定什么时候重用不可见的item views.重用一个view的时候，layout manager会要求adapter从数据集中取出另一个元素来替换被替换的view的内容。用这种方式来重用views避免了创建不必要的views和代价高昂的findviewbyid查找，提升了展示效果。
+
+RecyclerView提供以下内置的layout managers
+
+- 以垂直或水平方式展示滚动条目的LinearLayoutManager
+- 以网格(grid)方式展示条目的GridLayoutManager
+- 以交错网格（staggered grid）展示条目的StaggeredGridLayoutManager
+
+如果要创建自定义layout manager,需要继承RecyclerView.LayoutManager类
+
+###动画
+
+在RecyclerView中添加和删除条目动画师默认支持的。想要自定义这些动画的话，需要继承RecyclerView.ItemAnimator类以及使用RecyclerView.setItemAnimator() 方法。
+
+###例子
+
+下面的代码描述如何在布局中添加RecyclerView
+
+{% highlight xml %}
+	<!-- A RecyclerView with some commonly used attributes -->
+	<android.support.v7.widget.RecyclerView
+    	android:id="@+id/my_recycler_view"
+    	android:scrollbars="vertical"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"/>
+
+{% endhighlight %}
+
+你在布局上添加了RecyclerView后,你需要获得对象的处理，将它连接layout manager,并且为展示的数据集附上adapter
+
+{% highlight java %}
+	public class MyActivity extends Activity {
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.my_activity);
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new MyAdapter(myDataset);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+    ...
+}
+
+The adapter provides access to the items in your data set, creates views for items, and replaces the content of some of the views with new data items when the original item is no longer visible. The following code example shows a simple implementation for a data set that consists of an array of strings displayed using TextView widgets:
+
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    private String[] mDataset;
+
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView mTextView;
+        public ViewHolder(TextView v) {
+            super(v);
+            mTextView = v;
+        }
+    }
+
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public MyAdapter(String[] myDataset) {
+        mDataset = myDataset;
+    }
+
+    // Create new views (invoked by the layout manager)
+    @Override
+    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                   int viewType) {
+        // create a new view
+        View v = LayoutInflater.from(parent.getContext())
+                               .inflate(R.layout.my_text_view, parent, false);
+        // set the view's size, margins, paddings and layout parameters
+        ...
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
+        holder.mTextView.setText(mDataset[position]);
+
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return mDataset.length;
+    }
+}
+
+{% endhighlight %}
+
+###创建Cards
+未完待续
+
+
 
 
 
