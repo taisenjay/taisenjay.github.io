@@ -279,10 +279,12 @@ RecyclerView提供以下内置的layout managers
     }
     ...
 }
+{% endhighlight %}
 
-The adapter provides access to the items in your data set, creates views for items, and replaces the content of some of the views with new data items when the original item is no longer visible. The following code example shows a simple implementation for a data set that consists of an array of strings displayed using TextView widgets:
+adapter提供你的数据集中的条目的存取，为条目创建view,当原来的item不可见时用新的items数据取代之前views的内容。下面的代码展示了一个包括用TextView展现一个String数组的数据集的简单实现：
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+{% highlight java %}
+	public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private String[] mDataset;
 
     // Provide a reference to the views for each data item
