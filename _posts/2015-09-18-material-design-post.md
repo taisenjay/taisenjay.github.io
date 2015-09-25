@@ -335,8 +335,59 @@ adapter提供你的数据集中的条目的存取，为条目创建view,当原�
 
 {% endhighlight %}
 
+![Smithsonian Image]({{site.url}}/images/card_travel.png)
+{: .image-pull-right}
+
 ###创建Cards
-未完待续
+CardView继承自FrameLayout类，它让你通过这个平台用卡片的形式展现一致的外观。CardView可以有阴影和圆润的边角。
+
+创建一个带阴影的card，用card_view:cardElevation参数。CardView在Android5.0(API21)及以上版本用真的三面图值（elevation）和动态的阴影，在早期版本使用过去的静态实现。想了解更多，看Maintaining Compatibility内容。
+
+用以下的这些属性来自定义CardView组件的外观
+
+- 用card_view:cardCornerRadius属性设置边角半径
+- 在代码中设置边角半径的话，用CardView.setRadius方法
+- 用card_view:cardBackgroundColor属性来设置card的背景颜色
+
+下面的代码向你展示怎样在布局中使用CardView
+
+{% highlight xml %}
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	xmlns:tools="http://schemas.android.com/tools"
+    	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    	... >
+    	<!-- A CardView that contains a TextView -->
+    	<android.support.v7.widget.CardView
+        	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        	android:id="@+id/card_view"
+        	android:layout_gravity="center"
+        	android:layout_width="200dp"
+        	android:layout_height="200dp"
+        	card_view:cardCornerRadius="4dp">
+
+        	<TextView
+            	android:id="@+id/info_text"
+            	android:layout_width="match_parent"
+            	android:layout_height="match_parent" />
+    	</android.support.v7.widget.CardView>
+	</LinearLayout>
+{% endhighlight %}
+
+了解更多信息，参考CardView的API
+
+###增加依赖（add dependencies）
+RecyclerView和CardView是v7 Support Libraries的一部分，想使用这些控件，需要在你app的module中添加这些Gradle dependencies 
+
+{% highlight java %}
+	dependencies {
+    	...
+    	compile 'com.android.support:cardview-v7:21.0.+'
+    	compile 'com.android.support:recyclerview-v7:21.0.+'
+	}
+{% endhighlight %}
+
+
+
 
 
 
