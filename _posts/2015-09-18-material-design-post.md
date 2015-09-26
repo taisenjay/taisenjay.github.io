@@ -386,7 +386,40 @@ RecyclerView和CardView是v7 Support Libraries的一部分，想使用这些控�
 	}
 {% endhighlight %}
 
+##自定义阴影（shadows)和裁剪视图（clipping views）
 
+Material Design为UI元素引进了海拔属性（elevation）,Elevation使用户们认识到每一个元素之间的相对数据的重要性，且将注意力集中在即将发生的任务上。
+
+一个视图（view）的海拔值用Z来表示，它决定了视图可视的阴影形状。也就是说Z大的view挡住了Z小的view，但是呢，view的实际大小并没有改变。
+
+阴影通过设置了海拔高度的view的父view来绘制，因此，标准的视图裁剪主题，也是默认通过父view来裁剪。
+
+海拔在创建一些动画时也很有用，比如响应某些行为时组件在视图平面上暂时的升起。
+
+想要了解更多关于material design中elevation的相关信息，关注Objects in 3D space内容。
+
+###为你的views指定elevation
+view的Z值有两个组成部分
+
+- Elevation(海拔):静止的部分
+- Transition（平移）:用于动画的动态部分
+
+Z = elevation + translationZ
+
+<figure>
+	<img src="/images/shadows-depth.png">
+	<figcaption>Shadows for different view elevations.</figcaption>
+</figure>
+
+在布局定义中用android:elevation参数来定义view的elevation值，在activity的代码中用 View.setElevation() 方法来设置。
+
+设置translation值得话，用 View.setTranslationZ()方法来设置。
+
+新方法 ViewPropertyAnimator.z()和ViewPropertyAnimator.translationZ()可以让你轻易的设置views的elevation值，想了解更多，看 ViewPropertyAnimator的API和Property Animation 的官方开发者指南。
+
+你也可以使用StateListAnimator，一种声明的方式来指定这些动画。这种方法在处理状态改变产生动画时特别有用，比如用户按下一个button.想了解更多信息，请看Animate View State Changes。
+
+###未完待续
 
 
 
