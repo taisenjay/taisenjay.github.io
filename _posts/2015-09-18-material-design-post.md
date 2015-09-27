@@ -419,10 +419,30 @@ Z = elevation + translationZ
 
 你也可以使用StateListAnimator，一种声明的方式来指定这些动画。这种方法在处理状态改变产生动画时特别有用，比如用户按下一个button.想了解更多信息，请看Animate View State Changes。
 
-###未完待续
+###自定义视图阴影和提纲（Outlines）
 
+视图背景图片的边界决定了视图阴影的默认形状。提纲（Outlines）表示一个图形对象的外部形状，定义了触摸反馈的波纹面积。
 
+看下面的视图，就是带背景图片的：
 
+{% highlight xml %}
+	<TextView
+    	android:id="@+id/myview"
+    	...
+    	android:elevation="2dp"
+    	android:background="@drawable/myrect" />
+{% endhighlight %}
+
+背景图片定义为带了圆润边角的矩形
+
+{% highlight xml %}
+	<!-- res/drawable/myrect.xml -->
+	<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       		android:shape="rectangle">
+    	<solid android:color="#42000000" />
+    	<corners android:radius="5dp" />
+	</shape>
+{% endhighlight %}
 
 
 
