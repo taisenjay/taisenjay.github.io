@@ -419,9 +419,9 @@ Z = elevation + translationZ
 
 你也可以使用StateListAnimator，一种声明的方式来指定这些动画。这种方法在处理状态改变产生动画时特别有用，比如用户按下一个button.想了解更多信息，请看Animate View State Changes。
 
-###自定义视图阴影和提纲（Outlines）
+###自定义视图阴影和轮廓（Outlines）
 
-视图背景图片的边界决定了视图阴影的默认形状。提纲（Outlines）表示一个图形对象的外部形状，定义了触摸反馈的波纹面积。
+视图背景图片的边界决定了视图阴影的默认形状。轮廓（Outlines）表示一个图形对象的外部形状，定义了触摸反馈的波纹面积。
 
 看下面的视图，就是带背景图片的：
 
@@ -433,7 +433,7 @@ Z = elevation + translationZ
     	android:background="@drawable/myrect" />
 {% endhighlight %}
 
-背景图片定义为带了圆润边角的矩形
+背景图片定义为带了圆角的矩形
 
 {% highlight xml %}
 	<!-- res/drawable/myrect.xml -->
@@ -443,6 +443,25 @@ Z = elevation + translationZ
     	<corners android:radius="5dp" />
 	</shape>
 {% endhighlight %}
+
+当背景图片（drawable）定义了view的轮廓时，view会投射出带圆角的阴影。提供一个自定义轮廓重写view的默认阴影形状。
+
+在你的代码中为你的view自定义轮廓
+
+- 继承ViewOutlineProvider类
+- 重写getOutline()方法
+- 用View.setOutlineProvider()方法给你的view指定新的outline provider
+
+你使用Outline类中方法可以创建带圆角的椭圆形或矩形轮廓。view默认的outline provider从view的背景中得到轮廓。要防止view投射阴影的话，设置它的outline provider为空就好了。
+
+###裁剪Views
+
+裁剪views让你可以轻松的改变view的形状。你可以为了使视图和其他设计元素风格搭配来裁剪view或者为了响应用户输入改变形状。你可以使用View.setClipToOutline()方法或者android:clipToOutline参数view的轮廓区域。只有矩形，圆形和圆角矩形支持轮廓裁剪，并且裁剪的权限由Outline.canClip()方法决定。
+
+裁剪图片背景视图的话，设置该图片作为这个view的背景并且调用View.setClipToOutline()方法。
+
+裁剪视图是代价昂贵的操作，所以不要把你要裁剪视图的形状设置为动画。如果想达到这种效果，使用Reveal Effect动画
+
 
 
 

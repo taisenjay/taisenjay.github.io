@@ -20,7 +20,7 @@ image:
 
 * 黑马Android视频教程
 * Android开发精要（范怀宇著）
-* 再看一边thinking in java
+* 看完thinking in java
 * 算法导论
 * TCP/IP详解（卷1）
 * 深入理解计算机系统 
