@@ -462,6 +462,26 @@ Z = elevation + translationZ
 
 裁剪视图是代价昂贵的操作，所以不要把你要裁剪视图的形状设置为动画。如果想达到这种效果，使用Reveal Effect动画
 
+##利用Drawable开发
+
+下面的为drawables配备的功能能帮助你在你的app中实现material design:
+
+- 图片着色
+- 出色的色彩抽取
+- 矢量图
+
+本课程向你展示如何在你app中使用这些特性
+
+Tint Drawable Resources
+###给图片资源着色
+
+在Android5.0（API21）以上，你可以将bitmap图和定义为alpha masks的点9图。你可以用颜色资源或者指向颜色资源的主题参数来给它们着色（比如?android:attr/colorPrimary）通常情况下，你只会一次性创建这些资源，将它们自动涂成适合你的主题的颜色
+
+你可以使用setTint()方法申请将BitmapDrawable或是NinePatchDrawable对象上色。你也可以在布局文件中用android:tint和android:tintMode参数来设置颜色。
+
+###未完待续
+
+
 
 
 
