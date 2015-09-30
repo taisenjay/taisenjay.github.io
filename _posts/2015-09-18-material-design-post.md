@@ -479,7 +479,61 @@ Tint Drawable Resources
 
 你可以使用setTint()方法申请将BitmapDrawable或是NinePatchDrawable对象上色。你也可以在布局文件中用android:tint和android:tintMode参数来设置颜色。
 
-###未完待续
+###从图片中提取出色的颜色
+
+Android支持类库r21及以上包含了调色板类，也就是可以让你从图片中提取出色的颜色。这个类提取以下的出色颜色：
+
+- Vibrant
+- Vibrant dark
+- Vibrant light
+- Muted
+- Muted dark
+- Muted light
+
+想要提取这些颜色，传递一个Bitmap对象到你加载图片的背景线程中的Palette.generate()静态方法。如果你用不了这个线程，调用Palette.generateAsync()方法且提供一个listener来代替。
+
+你可以在Palette类中使用getter方法从图片中取回突出色，比如Palette.getVibrantColor。
+
+在你的项目中使用Palette类，需要添加以下的Gradle dependency到你的app module中
+
+	dependencies {
+    	...
+    	compile 'com.android.support:palette-v7:21.0.0'
+	}
+
+了解更多，看Palette类的API手册
+
+###创建矢量图
+
+在Android5.0（API21)及以上，你可以定义矢量图，也就是在缩放时不失真的图。你为一张矢量图，只需要准备一个asset文件，与一张bitmap图为了适配各种屏幕的情况相反。创建一个矢量图，你需要在<vector>XML文件中定义图形的细节。
+
+下面的示例用heart的shape定义了一个矢量图：
+{% highlight xml %}
+	<!-- res/drawable/heart.xml -->
+	<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    	<!-- intrinsic size of the drawable -->
+    	android:height="256dp"
+    	android:width="256dp"
+    	<!-- size of the virtual canvas -->
+    	android:viewportWidth="32"
+    	android:viewportHeight="32">
+
+  	<!-- draw a path -->
+  	<path android:fillColor="#8fff"
+      	android:pathData="M20.5,9.5
+                        c-1.955,0,-3.83,1.268,-4.5,3
+                        c-0.67,-1.732,-2.547,-3,-4.5,-3
+                        C8.957,9.5,7,11.432,7,14
+                        c0,3.53,3.793,6.257,9,11.5
+                        c5.207,-5.242,9,-7.97,9,-11.5
+                        C25,11.432,23.043,9.5,20.5,9.5z" />
+	</vector>
+{% endhighlight %}
+
+矢量图形在Android中代表着VectorDrawable对象。想了解更多关于pathDate语法的信息，请看SVG Path参考手册。想了解更多关于绘制矢量图形属性的信息，请看Animating Vector Drawable。
+
+##未完待续
+
 
 
 
