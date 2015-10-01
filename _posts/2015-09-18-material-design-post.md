@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 用Material Design创建App
-excerpt: "Create Apps With Material Design."
+excerpt: "翻译（Google官方文档）"
 modified: 2015-09-18
 tags: [android, material design,google]
 comments: true
@@ -28,7 +28,7 @@ image:
 ##本文将向你展示
 - Material主题
 - cards和lists控件
-- 自定义shadows和view clipping
+- 自定义shadows和裁剪view
 - 矢量图形（Vector Drawables）
 - 自定义动画（Animation）
 
@@ -532,8 +532,35 @@ Android支持类库r21及以上包含了调色板类，也就是可以让你从�
 
 矢量图形在Android中代表着VectorDrawable对象。想了解更多关于pathDate语法的信息，请看SVG Path参考手册。想了解更多关于绘制矢量图形属性的信息，请看Animating Vector Drawable。
 
-##未完待续
 
+##自定义动画
+
+当用户与你的app交互时，material design中的动画对用户的行为进行反馈并提供视觉效果上的连续性。material主题为buttin和activity切换提供了一些默认的动画，Android5.0（API21）及以上让你可以自定义这些动画和创建新以下新的内容：
+
+- 触摸反馈（Touch feedback）
+- 循环显示（Circular Reveal）
+- Activity切换（Activity transitions）
+- 弯曲移动（Curved motion）
+- 视图状态转变（View state changes）
+
+###自定义触摸反馈
+
+material design中的触摸反馈机制使得用户在与UI元素进行交互镇妖联系时能提供即时的视觉证明。buttons默认的触摸反馈动画使用了新的RippleDrawable类，它在不同的状态之间转换呈现涟漪状的效果。
+
+在大多数情况下，你在你的视图XML中通过下面的方式指定视图背景来应用这个功能：
+
+- '?android:attr/selectableItemBackground' for a bounded ripple（有界限的涟漪）
+- '?android:attr/selectableItemBackgroundBorderless' for a ripple that extends beyond the view（延伸的超出视图的涟漪）
+
+>Note: selectableItemBackgroundBorderless是API21介绍的新参数
+
+另一种选择是，你可以使用ripple元素将一个RippleDrawable定义成一个XML资源
+
+你可以给RippleDrawable对象指定一个颜色。如果要改变默认的触摸反馈颜色的话，使用主题的android:colorControlHighlight参数。
+
+了解更多信息，请看RippleDrawable类的API参考手册。
+
+##未完待续
 
 
 
