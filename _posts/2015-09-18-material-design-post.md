@@ -589,7 +589,7 @@ material design中的触摸反馈机制使得用户在与UI元素进行交互镇
 
 用这个效果隐藏一个预先可见的view
 
-{% highlgiht java %}
+{% highlight java %}
 
 	// previously visible view
 	final View myView = findViewById(R.id.my_view);
