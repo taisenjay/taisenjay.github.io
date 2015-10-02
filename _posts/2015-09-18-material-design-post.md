@@ -538,7 +538,7 @@ Android支持类库r21及以上包含了调色板类，也就是可以让你从�
 当用户与你的app交互时，material design中的动画对用户的行为进行反馈并提供视觉效果上的连续性。material主题为buttin和activity切换提供了一些默认的动画，Android5.0（API21）及以上让你可以自定义这些动画和创建新以下新的内容：
 
 - 触摸反馈（Touch feedback）
-- 循环显示（Circular Reveal）
+- 圆环显示（Circular Reveal）
 - Activity切换（Activity transitions）
 - 弯曲移动（Curved motion）
 - 视图状态转变（View state changes）
@@ -560,8 +560,65 @@ material design中的触摸反馈机制使得用户在与UI元素进行交互镇
 
 了解更多信息，请看RippleDrawable类的API参考手册。
 
-##未完待续
+###使用显示效果
 
+当展示或隐藏一组UI元素时，显示动画给用户提供了视觉上的连续性。ViewAnimationUtils.createCircularReveal()方法使你能够绘制一个裁剪的圆环效果来显示或隐藏一个view.
+
+显示一个预先不可见的view使用这个效果：
+
+{% highlight java %}
+
+	// previously invisible view
+	View myView = findViewById(R.id.my_view);
+
+	// get the center for the clipping circle
+	int cx = (myView.getLeft() + myView.getRight()) / 2;
+	int cy = (myView.getTop() + myView.getBottom()) / 2;
+
+	// get the final radius for the clipping circle
+	finalRadius = Math.max(myView.getWidth(), myView.getHeight());
+
+	// create the animator for this view (the start radius is zero)
+	Animator anim =
+    	ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
+
+	// make the view visible and start the animation
+	myView.setVisibility(View.VISIBLE);
+	anim.start();
+{% endhighlight %}
+
+用这个效果隐藏一个预先可见的view
+
+{% highlgiht java %}
+
+	// previously visible view
+	final View myView = findViewById(R.id.my_view);
+
+	// get the center for the clipping circle
+	int cx = (myView.getLeft() + myView.getRight()) / 2;
+	int cy = (myView.getTop() + myView.getBottom()) / 2;
+
+	// get the initial radius for the clipping circle
+	int initialRadius = myView.getWidth();
+
+	// create the animation (the final radius is zero)
+	Animator anim =
+    	ViewAnimationUtils.createCircularReveal(myView, cx, cy, initialRadius, 0);
+
+	// make the view invisible when the animation is done
+	anim.addListener(new AnimatorListenerAdapter() {
+    	@Override
+    	public void onAnimationEnd(Animator animation) {
+        	super.onAnimationEnd(animation);
+        	myView.setVisibility(View.INVISIBLE);
+    	}
+	});
+
+	// start the animation
+	anim.start();
+{% endhighlight %}
+
+###未完待续
 
 
 
