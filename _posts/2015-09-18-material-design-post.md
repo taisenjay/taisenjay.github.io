@@ -618,7 +618,37 @@ material design中的触摸反馈机制使得用户在与UI元素进行交互镇
 	anim.start();
 {% endhighlight %}
 
+###自定义Activity切换
+
+![ContactsAnim]({{site.url}}/images/ContactsAnim.jpg)
+{: .image-pull-right}
+
+在material design的app中的Activity切换提供了在通过移动的不同状态和一般元素的转换之间的视觉连接。你可以为进入或退出转换和activities中的共享元素指定自定义动画。
+
+- 进入转换决定了activity在进入场景时views如何展现。举个例子，在爆炸式进入转换中，views从外部进入场景并且飞入屏幕的中央。
+- 退出转换决定了activity在退出场景时views如何展现。举个例子，在爆炸式退出转换中，views从中央退出场景。
+- 分享元素转换决定了在这些activities中这两个activities切换的分享view如何展示。举个例子，如果两个activities有同样的一张图片但是位置和尺寸不同，changeImageTransform分享元素切换会在这些activities之间顺畅的平移并缩放这张图片。
+
+Android5.0（API21）支持这些进入和退出转换：
+
+- 爆炸式-views从场景的中央移进移出
+- 滑动式-views从一个场景的边缘移进移出
+- 渐变式-从场景中通过改变透明度来添加或移出view
+
+任何继承了Visibility类的转换都支持成为进入或退出转换。了解更多信息，请看Transition类的API参考.
+
+Android5.0（API21）还支持这些分享元素转换：
+
+- changeBounds - Animates the changes in layout bounds of target views.
+- changeClipBounds - Animates the changes in clip bounds of target views.
+- changeTransform - Animates the changes in scale and rotation of target views.
+- changeImageTransform - Animates changes in size and scale of target images.
+
+当你在你的app中激活了activiy转换时，进入和退出的activities默认的cross-fading转换就被激活了。
+
 ###未完待续
+
+
 
 
 
