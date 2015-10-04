@@ -646,10 +646,69 @@ Android5.0（API21）还支持这些分享元素转换：
 
 当你在你的app中激活了activiy转换时，进入和退出的activities默认的cross-fading转换就被激活了。
 
-###未完待续
+<figure>
+	<img src="/images/SceneTransition.png">
+	<figcaption>A scene transition with one shared element.</figcaption>
+</figure>
 
+####指定自定义转换（transitions）
 
+首先用android:windowContentTransitions参数激活窗体内容转换（transitions）当你定义一个继承了material主题的style.你一样也可以在你的style定义中指定进入（enter）,退出（exit），分享元素（shared element）转换：
 
+{% highlight xml %}
+
+	<style name="BaseAppTheme" parent="android:Theme.Material">
+  	<!-- enable window content transitions -->
+  	<item name="android:windowContentTransitions">true</item>
+
+  	<!-- specify enter and exit transitions -->
+  	<item name="android:windowEnterTransition">@transition/explode</item>
+  	<item name="android:windowExitTransition">@transition/explode</item>
+
+  	<!-- specify shared element transitions -->
+  	<item name="android:windowSharedElementEnterTransition">
+    	@transition/change_image_transform</item>
+  	<item name="android:windowSharedElementExitTransition">
+    	@transition/change_image_transform</item>
+	</style>
+{% endhighlight %}
+
+在这个例子中的'change_image_transform'应该如下定义：
+{% highlight xml %}
+
+	<!-- res/transition/change_image_transform.xml -->
+	<!-- (see also Shared Transitions below) -->
+	<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+  		<changeImageTransform/>
+	</transitionSet>
+{% endhighlight %}
+
+changeImageTransform元素相当于ChangeImageTransform类。了解更多，请看Transition的API参考。
+相同效果的也可以在代码中激活窗体内容转换（window content transitions），调用Window.requestFeature()方法：
+
+{% highlight xml %}
+
+	// inside your activity (if you did not enable transitions in your theme)
+	getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
+	// set an exit transition
+	getWindow().setExitTransition(new Explode());
+{% endhighlight %}
+
+在你的代码中指定转换，用一个Transition对象调用这些方法：
+
+- Window.setEnterTransition()
+- Window.setExitTransition()
+- Window.setSharedElementEnterTransition()
+- Window.setSharedElementExitTransition()
+
+setExitTransition（）和setSharedElementExitTransition（）方法定义了正在调用activity的退出转换（exit transition）。setEnterTransition()和setSharedElementEnterTransition()则定义了被调用activity的进入动画。
+
+想要实现转换的全部效果，你必须同时激活正在调用和被调用的activities的窗体内容转换（window content transitions）。否则的话，正在调用的activity会开始退出转换，但是然后你会看到一个窗体转换（像是scale或fade）。
+
+想要尽快开始一个进入转换（enter transition）,在被调用的activity上使用Window.setAllowEnterTransitionOverlap()方法，这会让你有更多的生动的进入转换。
+
+####未完待续
 
 
 
