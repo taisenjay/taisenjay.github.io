@@ -708,7 +708,27 @@ setExitTransition（）和setSharedElementExitTransition（）方法定义了正
 
 想要尽快开始一个进入转换（enter transition）,在被调用的activity上使用Window.setAllowEnterTransitionOverlap()方法，这会让你有更多的生动的进入转换。
 
-####未完待续
+####使用转换（transitions）开启一个activity
+
+如果你给一个activity设置了一个退出转换并激活，这个转换会在你像下面这样启动另一个activity时启动：
+
+{% highlight java %}
+
+	startActivity(intent,
+              ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+{% endhighlight %}
+
+If you have set an enter transition for the second activity, the transition is also activated when the activity starts. To disable transitions when you start another activity, provide a null options bundle.
+Start an activity with a shared element
+
+To make a screen transition animation between two activities that have a shared element:
+
+    Enable window content transitions in your theme.
+    Specify a shared elements transition in your style.
+    Define your transition as an XML resource.
+    Assign a common name to the shared elements in both layouts with the android:transitionName attribute.
+    Use the ActivityOptions.makeSceneTransitionAnimation() method.
+
 
 
 
