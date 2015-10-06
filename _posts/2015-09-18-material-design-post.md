@@ -718,18 +718,58 @@ setExitTransition（）和setSharedElementExitTransition（）方法定义了正
               ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 {% endhighlight %}
 
-If you have set an enter transition for the second activity, the transition is also activated when the activity starts. To disable transitions when you start another activity, provide a null options bundle.
-Start an activity with a shared element
+如果你给第二个activity设置了进入转换（enter transition）,当这个activity开启时转换也会被激活。如果想在start另一个activity时禁掉转换的话，提供一个空options bundle
 
-To make a screen transition animation between two activities that have a shared element:
+####开启一个带分享元素的activty
 
-    Enable window content transitions in your theme.
-    Specify a shared elements transition in your style.
-    Define your transition as an XML resource.
-    Assign a common name to the shared elements in both layouts with the android:transitionName attribute.
-    Use the ActivityOptions.makeSceneTransitionAnimation() method.
+想要在两个activity之间制造一个带分享元素的屏幕转换：
 
+- 在主题中激活window content 转换
+- 在你的style中指定一个分享元素
+- 把你的转换定义成一个XML资源
+- 用android:transitionName参数为分享元素（两个布局中）起一个名称
+- 使用ActivityOptions.makeSceneTransitionAnimation()方法
 
+{% highlight java %}
+
+	// get the element that receives the click event
+	final View imgContainerView = findViewById(R.id.img_container);
+
+	// get the common element for the transition in this activity
+	final View androidRobotView = findViewById(R.id.image_small);
+
+	// define a click listener
+	imgContainerView.setOnClickListener(new View.OnClickListener() {
+    	@Override
+    	public void onClick(View view) {
+        	Intent intent = new Intent(this, Activity2.class);
+        	// create the transition animation - the images in the layouts
+        	// of both activities are defined with android:transitionName="robot"
+        	ActivityOptions options = ActivityOptions
+            	.makeSceneTransitionAnimation(this, androidRobotView, "robot");
+        	// start the new activity
+        	startActivity(intent, options.toBundle());
+    	}
+	});
+{% endhighlight %}
+
+想要在你的中产生动态的分享视图，使用View.setTransitionName()方法在两个activities中指定一个常用元素名称。
+
+当你结束第二个activity时想要回退转换动画场景，调用Activity.finishAfterTransition()方法代替使用Activity.finish()。
+
+####开启一个带多个分享元素的activity
+
+想要在带多个分享元素的两个activity之间制造一个场景转换动画，用android:transitionName参数定义两个布局中的分享元素。（或者在两个activity中使用View.setTransitionName()方法），且像下面这样创建一个ActivityOptions对象：
+
+{% highlight java %}
+
+	ObjectAnimator mAnimator;
+	mAnimator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
+	...
+	mAnimator.start();
+{% endhighlight %}
+
+###未完待续Animate View State Changes
 
 
 
