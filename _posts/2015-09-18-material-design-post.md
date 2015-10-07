@@ -769,7 +769,70 @@ setExitTransition（）和setSharedElementExitTransition（）方法定义了正
 	mAnimator.start();
 {% endhighlight %}
 
-###未完待续Animate View State Changes
+###激活视图状态转换
+
+StateListAnimator类让你定义在view状态改变时运行的animator。下面的例子向你展示如何定义一个
+StateListAnimator作为一个XML资源：
+
+{% highlight xml %}
+
+	<!-- animate the translationZ property of a view when pressed -->
+	<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  		<item android:state_pressed="true">
+    		<set>
+      			<objectAnimator android:propertyName="translationZ"
+        		android:duration="@android:integer/config_shortAnimTime"
+        		android:valueTo="2dp"
+        		android:valueType="floatType"/>
+        		<!-- you could have other objectAnimator elements
+             	here for "x" and "y", or other properties -->
+    		</set>
+  		</item>
+  	<item android:state_enabled="true"
+    	android:state_pressed="false"
+    	android:state_focused="true">
+    		<set>
+      		<objectAnimator android:propertyName="translationZ"
+        	android:duration="100"
+        	android:valueTo="0"
+        	android:valueType="floatType"/>
+    		</set>
+  	</item>
+	</selector>
+{% endhighlight %}
+
+
+To attach custom view state animations to a view, define an animator using the selector element in an XML resource file as in this example, and assign it to your view with the android:stateListAnimator attribute. To assign a state list animator to a view in your code, use the AnimationInflater.loadStateListAnimator() method, and assign the animator to your view with the View.setStateListAnimator() method.
+
+When your theme extends the material theme, buttons have a Z animation by default. To avoid this behavior in your buttons, set the android:stateListAnimator attribute to @null.
+
+The AnimatedStateListDrawable class lets you create drawables that show animations between state changes of the associated view. Some of the system widgets in Android 5.0 use these animations by default. The following example shows how to define an AnimatedStateListDrawable as an XML resource:
+
+{% highlight xml %}
+
+	<!-- res/drawable/myanimstatedrawable.xml -->
+	<animated-selector
+    	xmlns:android="http://schemas.android.com/apk/res/android">
+
+    	<!-- provide a different drawable for each state-->
+    	<item android:id="@+id/pressed" android:drawable="@drawable/drawableP"
+        	android:state_pressed="true"/>
+    	<item android:id="@+id/focused" android:drawable="@drawable/drawableF"
+        	android:state_focused="true"/>
+    	<item android:id="@id/default"
+        	android:drawable="@drawable/drawableD"/>
+
+    	<!-- specify a transition -->
+    	<transition android:fromId="@+id/default" android:toId="@+id/pressed">
+        	<animation-list>
+            	<item android:duration="15" android:drawable="@drawable/dt1"/>
+            	<item android:duration="15" android:drawable="@drawable/dt2"/>
+            	...
+        	</animation-list>
+    	</transition>
+    	...
+	</animated-selector>
+{% endhighlight %}
 
 
 
