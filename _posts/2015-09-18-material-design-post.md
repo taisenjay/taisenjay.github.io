@@ -801,12 +801,11 @@ StateListAnimator作为一个XML资源：
 	</selector>
 {% endhighlight %}
 
+给view附上自定义视图状态动画，在这个例子中在XML资源文件中使用selector元素定义一个animator,并且使用android:stateListAnimator参数分配到你的view中。如果在你的代码中指定state list分配到你的view中的话，用AnimationInflater.loadStateListAnimator()方法，并且用View.setStateListAnimator()方法分配animator到你的view。
 
-To attach custom view state animations to a view, define an animator using the selector element in an XML resource file as in this example, and assign it to your view with the android:stateListAnimator attribute. To assign a state list animator to a view in your code, use the AnimationInflater.loadStateListAnimator() method, and assign the animator to your view with the View.setStateListAnimator() method.
+当你的主题是继承material主题的话，buttons默认会有一个Z animation。想要在你的buttons避免如此的话，设置android:stateListAnimator参数为@null。
 
-When your theme extends the material theme, buttons have a Z animation by default. To avoid this behavior in your buttons, set the android:stateListAnimator attribute to @null.
-
-The AnimatedStateListDrawable class lets you create drawables that show animations between state changes of the associated view. Some of the system widgets in Android 5.0 use these animations by default. The following example shows how to define an AnimatedStateListDrawable as an XML resource:
+AnimatedStateListDrawable类让你在有关联view的状态改变之间创建展示动画的图片。Android5.0中的一些系统组件默认的使用了这些动画。下面的例子展示怎样定义一个AnimatedStateListDrawable为一个XML资源：
 
 {% highlight xml %}
 
@@ -833,6 +832,8 @@ The AnimatedStateListDrawable class lets you create drawables that show animatio
     	...
 	</animated-selector>
 {% endhighlight %}
+
+###未完待续
 
 
 
