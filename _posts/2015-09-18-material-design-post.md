@@ -833,7 +833,79 @@ AnimatedStateListDrawable类让你在有关联view的状态改变之间创建展
 	</animated-selector>
 {% endhighlight %}
 
-###未完待续
+###绘制矢量图
 
+矢量图可以不失真的伸缩。AnimatedVectorDrawable类让你绘制一个矢量图的内容。
+
+一般在三个XML文件中绘制矢量图：
+
+- 在res/drawable/中的带<vector>元素的矢量图
+- 在res/drawable/中的带<animated-vector>元素的矢量图
+- 在res/anim/中的的带<objectAnimator>的一个或多个object animators
+
+绘制矢量图可以绘制<group>和<path>元素的参数。<group>元素定义了一系列paths或subpaths,<path>元素定义了将要绘制的路径（paths to be drawn）
+
+当你定义一个你想要绘制的矢量图时，使用android:name参数来给groups和paths指定一个唯一的名字，所以你能从你的animator定义中指向它们。举例如下：
+
+{% highlight xml %}
+
+	<!-- res/drawable/vectordrawable.xml -->
+	<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:height="64dp"
+    	android:width="64dp"
+    	android:viewportHeight="600"
+    	android:viewportWidth="600">
+    	<group
+        	android:name="rotationGroup"
+        	android:pivotX="300.0"
+        	android:pivotY="300.0"
+        	android:rotation="45.0" >
+        	<path
+            	android:name="v"
+            	android:fillColor="#000000"
+            	android:pathData="M300,70 l 0,-70 70,70 0,0 -70,70z" />
+    	</group>
+	</vector>
+{% endhighlight %}
+
+在矢量图中的绘制矢量图定义通过它们的名字指向groups和paths:
+
+{% highlight xml %}
+
+	<!-- res/drawable/animvectordrawable.xml -->
+	<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:drawable="@drawable/vectordrawable" >
+    	<target
+        	android:name="rotationGroup"
+        	android:animation="@anim/rotation" />
+    	<target
+        	android:name="v"
+        	android:animation="@anim/path_morph" />
+	</animated-vector>
+{% endhighlight %}
+
+未完待续
+The animation definitions represent ObjectAnimator or AnimatorSet objects. The first animator in this example rotates the target group 360 degrees:
+
+<!-- res/anim/rotation.xml -->
+<objectAnimator
+    android:duration="6000"
+    android:propertyName="rotation"
+    android:valueFrom="0"
+    android:valueTo="360" />
+
+The second animator in this example morphs the vector drawable's path from one shape to another. Both paths must be compatible for morphing: they must have the same number of commands and the same number of parameters for each command.
+
+<!-- res/anim/path_morph.xml -->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:duration="3000"
+        android:propertyName="pathData"
+        android:valueFrom="M300,70 l 0,-70 70,70 0,0   -70,70z"
+        android:valueTo="M300,70 l 0,-70 70,0  0,140 -70,0 z"
+        android:valueType="pathType" />
+</set>
+
+For more information, see the API reference for AnimatedVectorDrawable.
 
 
