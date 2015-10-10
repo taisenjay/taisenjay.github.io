@@ -885,27 +885,34 @@ AnimatedStateListDrawable类让你在有关联view的状态改变之间创建展
 {% endhighlight %}
 
 未完待续
-The animation definitions represent ObjectAnimator or AnimatorSet objects. The first animator in this example rotates the target group 360 degrees:
+动画绘制定义表示ObjectAnimator和AnimatorSet对象。在这个例子中的第一个动画让目标group旋转360度。
 
-<!-- res/anim/rotation.xml -->
-<objectAnimator
-    android:duration="6000"
-    android:propertyName="rotation"
-    android:valueFrom="0"
-    android:valueTo="360" />
+{% highlight xml %}
 
-The second animator in this example morphs the vector drawable's path from one shape to another. Both paths must be compatible for morphing: they must have the same number of commands and the same number of parameters for each command.
+	<!-- res/anim/rotation.xml -->
+	<objectAnimator
+    	android:duration="6000"
+    	android:propertyName="rotation"
+    	android:valueFrom="0"
+    	android:valueTo="360" />
+{% endhighlight %}
 
-<!-- res/anim/path_morph.xml -->
-<set xmlns:android="http://schemas.android.com/apk/res/android">
-    <objectAnimator
-        android:duration="3000"
-        android:propertyName="pathData"
-        android:valueFrom="M300,70 l 0,-70 70,70 0,0   -70,70z"
-        android:valueTo="M300,70 l 0,-70 70,0  0,140 -70,0 z"
-        android:valueType="pathType" />
-</set>
+第二个动画改变矢量图的坐标从一个形状到另一个形状。两个坐标必须都能兼容变形：它们必须有同样数量的命令并且每个命令必须有同样数量的参数。
 
-For more information, see the API reference for AnimatedVectorDrawable.
+{% highlight xml %}
+
+	<!-- res/anim/path_morph.xml -->
+	<set xmlns:android="http://schemas.android.com/apk/res/android">
+    	<objectAnimator
+        	android:duration="3000"
+        	android:propertyName="pathData"
+        	android:valueFrom="M300,70 l 0,-70 70,70 0,0   -70,70z"
+        	android:valueTo="M300,70 l 0,-70 70,0  0,140 -70,0 z"
+        	android:valueType="pathType" />
+	</set>
+{% endhighlight %}
+
+了解更多，请看AnimatedVectorDrawable的API参考手册。
+
 
 
