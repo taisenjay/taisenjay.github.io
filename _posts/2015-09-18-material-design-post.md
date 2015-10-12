@@ -914,5 +914,13 @@ AnimatedStateListDrawable类让你在有关联view的状态改变之间创建展
 
 了解更多，请看AnimatedVectorDrawable的API参考手册。
 
+##兼容性维护
+
+一些material design特征像是material主题和自定义activity切换只在Android5.0及以上才可用。但是，你可以设计你的运行在支持material design的的设备上的app来利用这些特征并且在运行之前发行的Android版本的设备上依然兼容。
+
+
+
+
+
 
 
