@@ -918,6 +918,24 @@ AnimatedStateListDrawable类让你在有关联view的状态改变之间创建展
 
 一些material design特征像是material主题和自定义activity切换只在Android5.0及以上才可用。但是，你可以设计你的运行在支持material design的的设备上的app来利用这些特征并且在运行之前发行的Android版本的设备上依然兼容。
 
+###自定义可选styles
+
+你可以配置你的app在支持material主题的设备上使用material主题，并且在在运行更早Android版本的设备上转换成老版的主题：
+
+  1、在res/values/styles.xml文件中定义一个继承自老版主题（如Holo）的主题。
+  2、在res/values-v21/styles.xml文件中定义一个继承material主题的同样名字的主题。
+  3、在manifest文件中设置这个主题作为你app的主题。
+
+>Note: 如果你的app使用了material主题但是没有用这种方式提供一个可选的主题，你的app将不会在运行Android5.0之前的android版本的设备上运行。
+
+###未完待续Provide Alternative Layouts
+
+If the layouts that you design according to the material design guidelines do not use any of the new XML attributes introduced in Android 5.0 (API level 21), they will work on previous versions of Android. Otherwise, you can provide alternative layouts. You can also provide alternative layouts to customize how your app looks on earlier versions of Android.
+
+Create your layout files for Android 5.0 (API level 21) inside res/layout-v21/ and your alternative layout files for earlier versions of Android inside res/layout/. For example, res/layout/my_activity.xml is an alternative layout for res/layout-v21/my_activity.xml.
+
+To avoid duplication of code, define your styles inside res/values/, modify the styles in res/values-v21/ for the new APIs, and use style inheritance, defining base styles in res/values/ and inheriting from those in res/values-v21/.
+
 
 
 
