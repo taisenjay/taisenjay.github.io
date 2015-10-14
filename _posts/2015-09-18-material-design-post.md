@@ -928,9 +928,9 @@ AnimatedStateListDrawable类让你在有关联view的状态改变之间创建展
 
 >Note: 如果你的app使用了material主题但是没有用这种方式提供一个可选的主题，你的app将不会在运行Android5.0之前的android版本的设备上运行。
 
-###未完待续Provide Alternative Layouts
+###Provide Alternative Layouts
 
-If the layouts that you design according to the material design guidelines do not use any of the new XML attributes introduced in Android 5.0 (API level 21), they will work on previous versions of Android. Otherwise, you can provide alternative layouts. You can also provide alternative layouts to customize how your app looks on earlier versions of Android.
+如果你根据material design向导来设计你的布局不用任何在Android 5.0(API21)中介绍的新XML参数的话，它们可以在之前的Android版本上奏效。否则的话，你可以提供可选的布局。你也可以提供可选的布局来自定义你的app在早先Android版本上的效果。
 
 Create your layout files for Android 5.0 (API level 21) inside res/layout-v21/ and your alternative layout files for earlier versions of Android inside res/layout/. For example, res/layout/my_activity.xml is an alternative layout for res/layout-v21/my_activity.xml.
 
