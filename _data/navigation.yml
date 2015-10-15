@@ -1,14 +1,14 @@
 # Site navigation links
 
-- title: About Me
+- title: 关于
   url: /about/
 
-- title: All BLOG
+- title: 文章
   url: /posts/
 
-- title: Fragment
+- title: 记忆
   url: /fragment/
   
-- title: Personal Resume
+- title: 个人简历
   url: /resume/
   
