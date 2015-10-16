@@ -936,7 +936,86 @@ AnimatedStateListDrawable类让你在有关联view的状态改变之间创建展
 
 为了避免复制代码，在res/value中定义你的styles,为新的API在res/value-v21/中修改styles,并且使用style继承，在res/values/中定义基styles并且在res/values-v21中继承他们。
 
-###未完待续
+###使用支持类库
+
+V7支持类库r21及以上包括下面的material design特征：
+
+- 当你应用Theme.AppCompat themes中的一个主题时为一些系统控件准备的Material Design风格    
+- Theme.AppCompat主题中的调色板（Color palette）主题参数
+- 展示数据集的RecyclerView控件
+- 创建卡片的CardView
+- 从图片中提取突出色的Palette类
+
+####系统控件
+
+Theme.AppCompat主题为以下这些控件提供material design风格
+
+- EditText
+- Spinner
+- CheckBox
+- RadioButton
+- SwitchCompat
+- CheckedTextView
+
+####调色板（Color Palette）
+
+使用Android V7 Library获取material design风格和自定义调色板，应用Theme.AppCompat主题中的一个：
+
+{% highlight xml %}
+
+	<!-- extend one of the Theme.AppCompat themes -->
+	<style name="Theme.MyTheme" parent="Theme.AppCompat.Light">
+    	<!-- customize the color palette -->
+    	<item name="colorPrimary">@color/material_blue_500</item>
+    	<item name="colorPrimaryDark">@color/material_blue_700</item>
+    	<item name="colorAccent">@color/material_green_A200</item>
+	</style>
+{% endhighlight %}
+
+####Lists和Cards
+
+通过带以下限制的Android V7 Support Library使得RecyclerView和CardView控件在早先的版本上可用：
+
+- 使用额外的padding使得CardView回落到一个可编程的阴影实现
+- CardView不会裁剪它的和圆角相交的子views
+
+####依赖（Dependencies）
+
+在android5.0(API21)之前版本上使用这些特征的话，在你的项目中包含Android v7 Support library的Gradle依赖：
+
+	dependencies {
+    	compile 'com.android.support:appcompat-v7:21.0.+'
+    	compile 'com.android.support:cardview-v7:21.0.+'
+    	compile 'com.android.support:recyclerview-v7:21.0.+'
+	}
+
+
+###未完待续Check the System Version
+
+The following features are available only in Android 5.0 (API level 21) and above:
+
+    Activity transitions
+    Touch feedback
+    Reveal animations
+    Path-based animations
+    Vector drawables
+    Drawable tinting
+
+To preserve compatibility with earlier versions of Android, check the system version at runtime before you invoke the APIs for any of these features:
+
+// Check if we're running on Android 5.0 or higher
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    // Call some material design APIs here
+} else {
+    // Implement this feature without material design
+}
+
+Note: To specify which versions of Android your app supports, use the android:minSdkVersion and android:targetSdkVersion attributes in your manifest file. To use the material design features in Android 5.0, set the android:targetSdkVersion attribute to 21. For more information, see the <uses-sdk> API guide.
+
+
+
+
+
 
 
 
