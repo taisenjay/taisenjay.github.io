@@ -25,6 +25,8 @@ image:
 
 相信大家对Material Design这个概念都比较熟悉了吧，在我看来Material Design就像是一套界面设计标准。最近刚刚搭建了博客但不知道第一篇Blog发什么好，索性就来翻译一波Android官方文档吧翻译的同时顺便还能学习学习（PS：本人英语较渣，所以对我来说这是个很大的挑战）
 
+<font color="blue">（最后一次更新，10月17号）本篇文章翻译到一半的时候才发现原来居然那么长，顿时好后悔，中途有过好几次想要放弃，但是想到自己的第一篇Blog就半途而废实在是说不过去，因此只能每天抽出一点零碎的时间来更新，现在一看居然都过去一个月了（汗！），好在是自己坚持将其完成了。谈点感受，怎么说呢，自己选择的路就一定要坚持到底，不轻言放弃！</font>
+
 ##本文将向你展示
 - Material主题
 - cards和lists控件
@@ -990,27 +992,30 @@ Theme.AppCompat主题为以下这些控件提供material design风格
 	}
 
 
-###未完待续Check the System Version
+###检查系统版本
 
-The following features are available only in Android 5.0 (API level 21) and above:
+下面的特征只在Android5.0（API21）以上可用：
 
-    Activity transitions
-    Touch feedback
-    Reveal animations
-    Path-based animations
-    Vector drawables
-    Drawable tinting
+- 界面切换（Activity transitions）
+- 触摸反馈（Touch feedback）
+- 显示动画（Reveal animations）
+- 基于路径的动画（Path-based animations）
+- 矢量图（Vector drawables）
+- 图片着色（Drawable tinting）
 
-To preserve compatibility with earlier versions of Android, check the system version at runtime before you invoke the APIs for any of these features:
+为了维护早先android版本的兼容性，在你调用一下的API之前在运行时检测系统版本：
 
-// Check if we're running on Android 5.0 or higher
-if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-    // Call some material design APIs here
-} else {
-    // Implement this feature without material design
-}
+{% highlight xml %}
 
-Note: To specify which versions of Android your app supports, use the android:minSdkVersion and android:targetSdkVersion attributes in your manifest file. To use the material design features in Android 5.0, set the android:targetSdkVersion attribute to 21. For more information, see the <uses-sdk> API guide.
+	// Check if we're running on Android 5.0 or higher
+	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    	// Call some material design APIs here
+	} else {
+    	// Implement this feature without material design
+	}
+{% endhighlight %}
+
+>Note:为了确定你的app支持哪一个Android版本，在你的清单文件中使用android:minSdkVersion和android:targetSdkVersion参数。在Android5.0中使用material design特征，设置android:targetSdkVersion为21。了解更多，请看<use-sdk>API向导。
 
 
 
