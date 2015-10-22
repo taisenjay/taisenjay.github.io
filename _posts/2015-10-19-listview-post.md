@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "LisView基本用法及实践"
+title: "LisView基本用法及练习"
 excerpt: "android基础知识点（3）"
 tags: [service,lifecycle]
 comments: true

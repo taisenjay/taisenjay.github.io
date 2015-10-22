@@ -1,0 +1,221 @@
+---
+layout: post
+title: "Fragment基本用法及实现Tab"
+excerpt: "android基础知识点（4）"
+tags: [service,lifecycle]
+comments: true
+image:
+  feature: sample-image-5.jpg
+  credit: WeGraphics
+  creditlink: http://wegraphics.net/downloads/free-ultimate-blurred-background-pack/
+---
+
+<section id="table-of-contents" class="toc">
+  <header>
+    <h3>Overview</h3>
+  </header>
+<div id="drawer" markdown="1">
+*  Auto generated table of contents
+{:toc}
+</div>
+</section><!-- /#table-of-contents -->
+
+<font color="red">本文素材选自郭霖书籍《第一行代码》及其博客</font>
+
+Fragment是在Android3.0时推出的，主要是为了利用平板电脑的大屏幕。fragment非常类似于Activity,可以像Activity一样包含布局。Fragment通常是嵌套在Activity中使用的。可以想象如果应用中用了太多的Activity，将不利于项目的维护，而使用fragment却非常灵活。到如今，fragment的应用已经非常广泛了，现在主要用于实现Tab分页。对fragment的基本介绍就到这里了。下面就创建一个fragment动手练习一下。
+
+#fragment的简单使用
+
+在一个Activity中添加两个fragment平分Activity空间，首先新建一个左侧布局left_fragment.xml,代码如下：
+
+{% highlight xml %}
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="vertical" >
+    
+    	<Button 
+        	android:id="@+id/button"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_gravity="center_horizontal"
+        	android:text="Button"
+        	/>
+
+	</LinearLayout>
+{% endhighlight %}
+
+通过代码可以看到left_fragment布局上只有一个Button，它的text就是“button”。接下来再创建一个fragment布局，名称为right_fragment.xml,布局依然不需要复杂控件，只添加一个TextView就好（TextView的文本当然随便取了，我们就将text设为“this is right fragment”吧），再将LinearLayout设置一个背景颜色，即`android:background="#00ff00"`（绿色），（这样看起来区分明显一点）。
+
+接下来进行下一步，创建Fragment代码，正式关联fragment的布局吧，下面是关联left_fragment.xml的LeftFragment类的代码：
+
+{% highlight java %}
+
+	public class LeftFragment extends Fragment {
+	
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View view = inflater.inflate(R.layout.left_fragment, container, false);
+			return view;
+		}
+	}
+{% endhighlight %}
+
+可以看到我们的LeftFragment继承了Fragment类，重写了OnCreate（）方法（一看就知道是和Activity的OnCreate（）一个性质的），可以看到OnCreateView（）方法传入了一个LayoutInflater参数，通过调用它的inflater（）方法，我们将R.layout.left_fragment填充到view视图中，并返回这个view。按照同样的方法我们再继续创建RightFragment关联right_fragment.xml布局。
+
+接下来我们再修改activity_main.xml布局:
+
+{% highlight xml %}
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" >
+		<fragment
+			android:id="@+id/left_fragment"
+			android:name="com.example.fragmenttest.LeftFragment"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1" />
+		<fragment
+			android:id="@+id/right_fragment"
+			android:name="com.example.fragmenttest.RightFragment"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1" />
+	</LinearLayout>
+{% endhighlight %}
+
+可以看到我们在activity_main.xml中通过<fragment>标签添加了我们的LeftFragment和RightFragment,观察一下就会发现，我们是同过指定android：name这个属性来指定到具体的Fragment类的，这里就是LeftFragment和RightFragment的路径名加类名（具有唯一性）。运行一下，效果如图：
+
+<figure>
+	<img src="/images/fragment-1.png">
+</figure>
+
+#动态添加fragment
+
+上一节我们使用fragment,只是完成了静态添加，这是最简单最基础的（并没有实用价值），在实际开发中，还是动态添加fragment为主，下面就来尝试一下动态添加fragment.新建another_right_fragment.xml，代码如下：
+
+{% highlight xml %}
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:background="#ffff00"
+    	android:orientation="vertical" >
+    
+		<TextView 
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_gravity="center_horizontal"
+	    	android:textSize="20sp"
+	    	android:text="This is another right fragment"
+	    	/>
+    </LinearLayout>
+{% endhighlight %}
+
+可以看到我们依然构建了一个超简单的fragment布局，背景设置为黄色，文本设置为"This is another right fragment"，与上文一样，创建一个AnotherRightFragmentl类关联此布局。接下来我们就要动态的将该fragment动态添加到我们的MainActivity中。先编辑我们的activity_main.xml,代码如下：
+
+{% highlight xml %}
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		<fragment
+			android:id="@+id/left_fragment"
+			android:name="com.example.fragmenttest.LeftFragment"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1" />
+		<FrameLayout
+			android:id="@+id/right_layout"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1" >
+			<fragment
+				android:id="@+id/right_fragment"
+				android:name="com.example.fragmenttest.RightFragment"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+		</FrameLayout>
+	</LinearLayout>
+{% endhighlight %}
+
+可以看到我们添加了一个FrameLayout，并将right_fragment添加到了其中。之后我们将在代码中用AnotherRightFragment来替换RightFragment，实现动态添加fragment。代码如下：
+
+{% highlight xml %}
+
+	public class MainActivity extends Activity implements OnClickListener {
+
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_main);
+			Button button = (Button) findViewById(R.id.button);
+			button.setOnClickListener(this);
+		}
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.button:
+				AnotherRightFragment fragment = new AnotherRightFragment();
+				FragmentManager fragmentManager = getFragmentManager();
+				FragmentTransaction transaction = fragmentManager
+						.beginTransaction();
+				transaction.replace(R.id.right_layout, fragment);
+				transaction.addToBackStack(null);
+				transaction.commit();
+				break;
+			default:
+				break;
+				}
+			}
+		}
+{% endhighlight %}
+
+可以看到我们给button设置了点击监听，当点击Button时，我们就开始替换原来的fragment，实现动态添加fragment。我们可以看到一共是以下这六行代码实现了这个功能：
+
+	AnotherRightFragment fragment = new AnotherRightFragment();
+	FragmentManager fragmentManager = getFragmentManager();
+	FragmentTransaction transaction = fragmentManager.beginTransaction();
+	transaction.replace(R.id.right_layout, fragment);
+	transaction.addToBackStack(null);
+	transaction.commit();
+
+我们来看一下
+
+1、new了一个AnotherRightFragment类，也就是我们准备拿它替换原fragment的的fragment
+2、通过调用getFragmentManager()得到了一个FragmentManager，顾名思义这是一个Fragment管理者类
+3、通过调用FragmentManager的beginTransaction()方法拿到一个FragmentTransaction类，中文“事务”的意思，说明我们进行添加fragment的动作是被封装在FragmentTransaction这个叫事务的类中
+4、通过事务的replace（）方法进行替换，可以看到有两个参数，第一个是我们FrameLayout(也就是fragment的父布局)的id，第二个就是我们的AnotherRightFragment了
+5、调用事务的addToBackStack()方法，添加到返回栈的意思，意思就是说，它本来是不在返回栈的（当我们按退出键时就会直接退出Activity），而调用了它后，我们再按退出键时，则会将该fragment退出，而不会退出它的宿主Activity
+6、最后但同样重要的是，事务必须得提交后，才能生效，调用commit（）。
+
+重新运行下程序，效果和此前一样，再点击一下按钮，我们的fragment就进来了，效果如图：
+
+<fragment>
+	<img src="fragment-2.png">
+</fragment>
+
+#fragment和Activity之间进行通信
+
+虽然fragment是嵌入在Activity中显示的，但实际上它们依然是分离的。首先明显的是，Activity和Fragment是两个独立的类，它们之间并没有直接的通信方式。那要是我们在Activity中想要调用Fragment中的方法该如何实现呢，在fragment中调用Activity中的方法又如何实现呢？
+
+FragmentManager提供了一个类似于findViewById的方法，专门用于从布局文件中获取fragment实例，代码如下：
+
+	RightFragment rightFragment=（RightFragment）getFragmentManager（）.findFragmentById(R.id.right_fragment);
+
+这下就可以在Activity中调用fragment中的方法了。那又如何在fragment中调用Activity中的方法呢？那就更简单了，代码如下：
+
+	MainActivity mainActivity=（MainActivity）getActivity（）；
+
+这下fragment就可以轻松使用Activity的方法了，此外，由于Activity是一个Context（上下文）对象，所以当fragment需要Context时，也可以通过getActivity()来实现。
+
+#Fragment实现Tab
+
+未完待续
+
