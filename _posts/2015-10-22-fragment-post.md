@@ -217,5 +217,138 @@ FragmentManager提供了一个类似于findViewById的方法，专门用于从�
 
 #Fragment实现Tab
 
-未完待续
+进行移动端的应用开发，必然会受屏幕小的限制，所以在实际的商业开发中，App都必须要充分的利用空间，我们代开任意的一个App。它下面或者是上面都会有几个标签进行分页，你点哪个标签，与那个标签匹配的内容就会显现。比如QQ，它在下面就有三个分页，分别是“消息”“联系人”“动态”。所以说现在的App实现分页是非常的普遍了，所以现在这也是必须要掌握的了。那这个Tab又是怎么实现的呢，我现在只接触到了ViewPager和Fragment（高端的以后再学吧），今天就练习一下用Fragment实现Tab。
+
+我们创建一个FragmentDemo项目，首先编辑activity_main.xml布局，代码如下
+
+{% highlight xml %}
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/tab_bg"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_message"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/message_unselected"
+                android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息"
+                android:textColor="#82858b"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_contacts"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_contacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/contacts_unselected"
+                android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:id="@+id/tv_contacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系人"
+                android:textColor="#82858b"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_news"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/news_unselected"
+                android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:id="@+id/tv_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="动态"
+                android:textColor="#82858b"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+	</LinearLayout>
+{% endhighlight %}
+
+可以看到我们上面放了一个framelayout（很明显这是用来添加Fragment的），然后下面是一个水平的线性布局，并给它设置一个背景图片，就是我们下方三个tab按钮所在的线性布局了。然后是分别三个垂直的线性布局，分别放置了"消息""联系人""动态"的三张图片和三个显示文本的TextView。
+
+接下来就来实现这三个fragment布局，首先新建fragment_message.xml布局，代码如下：
+
+{% highlight xml %}
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:orientation="vertical" android:layout_width="match_parent"
+    	android:layout_height="match_parent">
+    
+    	<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="这里是消息布局"/>
+	</LinearLayout>
+{% endhighlight %}
+
+可以看到我们只放了一个TextView显示文本来标识这个是在MessageFragment布局中，其他的联系人fragment,动态fragment我们也依葫芦画瓢，只简单标识它就好。接下来就要新建MessageFragment类来关联fragment_message布局了（其他两个fragment也一样）。
+
+新建MessageFragment类继承Fragment类，代码如下：
+
+{% highlight java %}
+
+	public class MessageFragment extends Fragment {  
+  		 public View onCreateView(LayoutInflater inflater, ViewGroup container,  
+            	Bundle savedInstanceState) {  
+        	View view = inflater.inflate(R.layout.message_layout, container, 	false);  
+        	return view;  
+    	}  
+ 	}  
+{% endhighlight %}
+
+三个Fragment都构建好关联好布局后，接下来就进入最关键最重要的环节，将三个Fragment真正的应用到我们的MainActivity中，也就是主布局。MainActivity代码如下：
+
+未完待续……
 
