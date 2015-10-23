@@ -198,7 +198,7 @@ Fragment是在Android3.0时推出的，主要是为了利用平板电脑的大�
 重新运行下程序，效果和此前一样，再点击一下按钮，我们的fragment就进来了，效果如图：
 
 <fragment>
-	<img src="fragment-2.png">
+	<img src="/images/fragment-2.png">
 </fragment>
 
 #fragment和Activity之间进行通信
