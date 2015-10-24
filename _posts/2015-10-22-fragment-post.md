@@ -350,5 +350,146 @@ FragmentManager提供了一个类似于findViewById的方法，专门用于从�
 
 三个Fragment都构建好关联好布局后，接下来就进入最关键最重要的环节，将三个Fragment真正的应用到我们的MainActivity中，也就是主布局。MainActivity代码如下：
 
-未完待续……
+{% highlight java %}
+	public class MainActivity extends Activity implements View.OnClickListener{
+
+    private MessageFragment messageFragment;
+    private ContactsFragment contactsFragment;
+    private NewsFragment newsFragment;
+
+    private LinearLayout messageLayout;
+    private LinearLayout contactsLayout;
+    private LinearLayout newsLayout;
+
+    private ImageView ivMessage;
+    private ImageView ivContacts;
+    private ImageView ivNews;
+    private TextView tvMessage;
+    private TextView tvContacts;
+    private TextView tvNews;
+
+    private FragmentManager fragmentManager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_main);
+
+        initViews();
+        fragmentManager=getFragmentManager();
+        setTabSelection(0);
+    }
+
+    private void initViews() {
+        messageLayout= (LinearLayout) findViewById(R.id.ll_message);
+        contactsLayout=(LinearLayout)findViewById(R.id.ll_contacts);
+        newsLayout=(LinearLayout)findViewById(R.id.ll_news);
+
+        ivMessage= (ImageView) findViewById(R.id.iv_message);
+        ivContacts= (ImageView) findViewById(R.id.iv_contacts);
+        ivNews= (ImageView) findViewById(R.id.iv_news);
+        tvMessage= (TextView) findViewById(R.id.tv_message);
+        tvContacts= (TextView) findViewById(R.id.tv_contacts);
+        tvNews= (TextView) findViewById(R.id.tv_news);
+
+        messageLayout.setOnClickListener(this);
+        contactsLayout.setOnClickListener(this);
+        newsLayout.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_message:
+                setTabSelection(0);
+                break;
+            case R.id.ll_contacts:
+                setTabSelection(1);
+                break;
+            case R.id.ll_news:
+                setTabSelection(2);
+                break;
+        }
+    }
+
+    private void setTabSelection(int index) {
+        clearSelection();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        hideFragments(transaction);
+
+        switch (index){
+            case 0:
+                ivMessage.setImageResource(R.mipmap.message_selected);
+                tvMessage.setTextColor(Color.WHITE);
+                if(messageFragment==null){
+                    messageFragment=new MessageFragment();
+                    transaction.add(R.id.fl_fragment_content,messageFragment);
+                }else{
+                    transaction.show(messageFragment);
+                }
+                break;
+            case 1:
+                ivContacts.setImageResource(R.mipmap.contacts_selected);
+                tvContacts.setTextColor(Color.WHITE);
+                if(contactsFragment==null){
+                    contactsFragment=new ContactsFragment();
+                    transaction.add(R.id.fl_fragment_content,contactsFragment);
+                }else{
+                    transaction.show(contactsFragment);
+                }
+                break;
+            case 2:
+                ivNews.setImageResource(R.mipmap.news_selected);
+                tvNews.setTextColor(Color.WHITE);
+                if(newsFragment==null){
+                    newsFragment=new NewsFragment();
+                    transaction.add(R.id.fl_fragment_content,newsFragment);
+                }else{
+                    transaction.show(newsFragment);
+                }
+                break;
+            default:
+                break;
+        }
+        transaction.commit();
+    }
+
+    private void clearSelection() {
+        ivMessage.setImageResource(R.mipmap.message_unselected);
+        tvMessage.setTextColor(Color.parseColor("#82858b"));
+        ivContacts.setImageResource(R.mipmap.contacts_unselected);
+        tvContacts.setTextColor(Color.parseColor("#82858b"));
+        ivNews.setImageResource(R.mipmap.news_unselected);
+        tvNews.setTextColor(Color.parseColor("#82858b"));
+    }
+
+    private void hideFragments(FragmentTransaction transaction) {
+        if(messageFragment!=null){
+            transaction.hide(messageFragment);
+        }
+        if(contactsFragment!=null){
+            transaction.hide(contactsFragment);
+        }
+        if(newsFragment!=null){
+            transaction.hide(newsFragment);
+        }
+    }
+	}
+{% endhighlight %}
+
+接下来就来仔细分析一下代码。在onCreate()中,我们首先调用了initViews()初始化这三个线性布局三个ImageView和TextView，并给三个线性布局注册了点击监听，我们传入的参数是this（回到类的上边去看你就发现我们的MainActivity类实现了点击监听接口，所以此时我们可以直接将当前类this作为一个监听器类当做参数传入）。然后我们通过getFragmentManager()方法获得了FragmentManager，再接着我们调用了setTabSelection()方法并传入参数0（参数0代表是第一个Tab）。接下来看setTabSelection()内部代码，其实看我们的方法名就知道这个方法是用来设置我们选中的Tab标签的，我们按下哪个，它就选中哪个。在方法中，我们首先调用了clearSelection(),我们试想一下，再设置当前Tab的时候，我们改变当前Tab按钮的颜色图片标志着它是被选中的，那之前被选中的记录得要清除吧，得把它颜色图片改成没选中的状态吧。然后是此外同样重要的是我们的按钮是来管理上面显示的Fragment的，选中了这个标签，就得将之前选中显示的Fragment隐藏，然后显示当前选中的Fragment，也就是我们调用的hideFragments（）方法，最后我们就判断当前选中的Tab，并显示对应的Fragment。
+
+演示效果如图
+
+<figure class="half">
+	<img src="/images/fragment-3.png">
+	<img src="/images/fragment-4.png">
+</figure>
+
+
+
+
+
+
 
