@@ -25,5 +25,5 @@ comments: true
 
 开发中碰到的问题大多都被前人遇到并解决了，所以一定要善用google+stackoverflow.
 
-如果你问我该怎么翻墙，好吧，分享一个<font color="blue">[网站](http://www.ishadowsocks.com/)(我什么都没说)</font>
+如果你问我该怎么翻墙，好吧，分享一个[网站](http://www.ishadowsocks.com/)(我什么都没说)
 
