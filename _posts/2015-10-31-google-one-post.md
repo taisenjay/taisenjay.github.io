@@ -13,7 +13,6 @@ comments: true
 
 下面是详细步骤：
 
-#1 Download source code from GitHub.
 - 1、从github下载[源代码](https://github.com/JakeWharton/ViewPagerIndicator)
 - 2、在Android Studio中依次打开File->Project Structure->add(就是左上角的“+”号)->Import Eclipse ADT Project(会看到是一个提供了多个选项的窗体，有gradle project,jar/arr等等你可以添加的模块，PS：我用的是Android Studio1.4)->只选中“library”这个文件夹而不是整个项目（下面默认的一步步就可以了）
 - 3、下面就是需要注意的问题了，你项目的build.gradle中的compileSdkVersion很大可能和ViewPagerIndicator中的compileSdkVersion不一样，所以将后者的修改成与你项目的一样。此外buildToolVersion也会不一样，按照一样的解决办法修改就行了
@@ -21,10 +20,10 @@ comments: true
 	dependencies {
     	compile project(':library')
 	}
-- 最后就可以同步项目了，Sync……搞定
+- 5、最后就可以同步项目了，Sync……搞定
 
 
 开发中碰到的问题大多都被前人遇到并解决了，所以一定要善用google+stackoverflow.
 
-如果你问我该怎么翻墙，好吧，分享一个[网站](http://www.ishadowsocks.com/)(我什么都没说)
+如果你问我该怎么翻墙，好吧，分享一个<font color="blue">[网站](http://www.ishadowsocks.com/)(我什么都没说)</font>
 
