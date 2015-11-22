@@ -24,4 +24,4 @@ image:
 * 我不去想未来是平坦还是泥泞，只要热爱生命，一切，都在意料之中
     * 汪国真《热爱生命》
 
-<a markdown="0" href="{{ site.url }}/fragment" class="btn">记忆</a>
+<a markdown="0" href="{{ site.url }}/timeline" class="btn">时光轴</a>
