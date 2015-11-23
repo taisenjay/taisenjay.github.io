@@ -71,3 +71,36 @@ image:
 
 #快速排序
 
+快速排序的基本思想是：首先随机挑选一个轴值，将待排序的数组进行分割，将所有比轴值小的元素排在前面，比它大的元素排在后面。然后再对已分割的两部分重复进行上述分割过程，直到整个序列有序。
+
+快速排序是对冒泡排序的一种改进。在冒泡排序中，元素的比较和移动只能在相邻位置进行，因而总的比较次数和移动次数较多。而在快速排序中，元素的比较和移动是从两端向中间进行的，较大的元素一次就能从前面移动到后面，较小的元素一次就能从后面移动到前面，元素移动的距离较远，从而减少了总的比较次数和移动次数。然而，因为我们无法确保选取的分割轴值就是数组的中位数（或接近中位数），快排的效率可能会很低下，这也是为什么最差情况时间复杂度为O(n^2)。
+
+{% highlight java %}
+
+	void quickSort(int[] arr,int left,int right){
+		int index=partition(arr,left,right);
+		if(left<index-1){
+			quickSort(arr,left,index-1);//排序左半部分
+		}
+		if(index<right){
+			quickSort(arr,index,right);//排序右半部分
+		}
+	}
+	int partition(int[] arr,int left,int right){
+		int pivot=arr[(left+right)/2];//挑出基准点
+		while(left<=right){
+			//找出左边中应被放到右边的元素
+			while(arr[left]<pivot)left++;
+			//找出右边中应被放到左边的元素
+			while(arr[right]>pivot)right--;
+			//交换元素，同时调整左右索引值
+			if(left<=right){
+				swap(arr,left,right);
+				left++;
+				right--;
+			}
+		}
+		return left;
+	}
+{% endhighlight %}
+
