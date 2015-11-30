@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Android Studio导入ViewpagerIndicator"
-excerpt: "google+stackoverflow问题（1）"
+excerpt: "tips编程中遇到的小问题（1）"
 tags: [android studio,stackoverflow]
 comments: true
 ---
@@ -23,7 +23,5 @@ comments: true
 - 5、最后就可以同步项目了，Sync……搞定
 
 
-开发中碰到的问题大多都被前人遇到并解决了，所以一定要善用google+stackoverflow.
-
-如果你问我该怎么翻墙，好吧，分享一个[网站](http://www.ishadowsocks.com/)(我什么都没说)
+开发中碰到的问题大多都被前人遇到并解决了，所以一定要善用搜索引擎和stackoverflow.
 
