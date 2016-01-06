@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "必学算法知识习题汇总"
-excerpt: "必学算法"
+title: "归并排序和快速排序"
+excerpt: "简单介绍"
 tags: [算法,排序]
 comments: true
 image:

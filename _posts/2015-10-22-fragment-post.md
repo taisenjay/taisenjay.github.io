@@ -20,8 +20,6 @@ image:
 </div>
 </section><!-- /#table-of-contents -->
 
-<font color="red">本文素材选自郭霖书籍《第一行代码》及其博客</font>
-
 Fragment是在Android3.0时推出的，主要是为了利用平板电脑的大屏幕。fragment非常类似于Activity,可以像Activity一样包含布局。Fragment通常是嵌套在Activity中使用的。可以想象如果应用中用了太多的Activity，将不利于项目的维护，而使用fragment却非常灵活。到如今，fragment的应用已经非常广泛了，现在主要用于实现Tab分页。对fragment的基本介绍就到这里了。下面就创建一个fragment动手练习一下。
 
 #fragment的简单使用
@@ -486,6 +484,8 @@ FragmentManager提供了一个类似于findViewById的方法，专门用于从�
 	<img src="/images/fragment-3.png">
 	<img src="/images/fragment-4.png">
 </figure>
+
+参考：<font color="blue">郭霖书籍《第一行代码》及其博客</font>
 
 
 
