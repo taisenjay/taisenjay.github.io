@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Java集合知识点"
-excerpt: "java基础要点（3）"
+title: "设计模式（了解）"
+excerpt: "java基础要点（4）"
 tags: [集合框架，面试题]
 comments: true
 ---
