@@ -6,7 +6,7 @@ tags: [集合框架，面试题]
 comments: true
 ---
 
-#单例模式
+##单例模式
 - 定义：确保一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。
 - 使用场景：确保某个类有且只有一个对象的场景，避免产生多个对象消耗过多的系统资源，或者某种类型的对象有且只有一个。例如，创建一个对象需要消耗的资源过多，如要访问IO和数据库等资源，这时就要考虑使用单例模式。
 - 实现要点：
@@ -75,7 +75,7 @@ comments: true
      }
 {% endhighlight %}
 
-2、工厂方法模式
+##工厂方法模式
 
 - 定义：定义一个用于创建对象的接口，让子类决定实例化哪个类
 - 使用场景：在任何需要生成复杂对象的地方，都可以使用工厂方法模式。复杂对象适合使用工厂模式，用new就可以完成创建的对象无需使用工厂模式。
@@ -145,8 +145,10 @@ comments: true
      }
 {% endhighlight %}
 
-3、MVP和MVVM
-[Android的MVP设计模式](http://blog.waynell.com/2015/05/29/mvp-on-android/)  
+##MVP和MVVM
+
+[Android的MVP设计模式](http://blog.waynell.com/2015/05/29/mvp-on-android/) 
+ 
 [Android MVVM到底是啥？看完就明白了](http://mp.weixin.qq.com/s?__biz=MzA4MjU5NTY0NA==&mid=401410759&idx=1&sn=89f0e3ddf9f21f6a5d4de4388ef2c32f#rd)
 
      
