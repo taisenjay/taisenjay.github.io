@@ -2,7 +2,7 @@
 layout: post
 title: "Android消息机制"
 excerpt: "Android基础要点（1）"
-tags: [，面试要点]
+tags: [消息机制，Handler，面试要点]
 comments: true
 ---
 
