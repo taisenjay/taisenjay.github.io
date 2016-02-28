@@ -29,16 +29,13 @@ image:
 
 <font size='6'>项目经验</font>
 	
-<font size='5'>豆瓣图书</font>
-
-[源码地址(内含apk)](http://taisenjay.com/files/DoubanBooks.zip)
-
-- 利用豆瓣提供的API获取用户搜索的相关图书信息的json数据，在App中用ListView呈现
-- 利用Handler消息队列机制和Thread.sleep()动态改变TextView的最大行数来实现TextView的动态展示
-- Activity切换动画、分享元素动画和Circular Reveal动画
-- 实现ListView弹性滑动
-- 自定义ViewGroup实现图书标签的流式布局
-- 根据三级缓存策略实现了一个简易的ImageLoader
+- <font size='5'>豆瓣图书</font>[源码地址(内含apk)](http://taisenjay.com/files/DoubanBooks.zip)
+	- 利用豆瓣提供的API获取用户搜索的相关图书信息的json数据，在App中用ListView呈现
+	- 利用Handler消息队列机制和Thread.sleep()动态改变TextView的最大行数来实现TextView的动态展示
+	- Activity切换动画、分享元素动画和Circular Reveal动画
+	- 实现ListView弹性滑动
+	- 自定义ViewGroup实现图书标签的流式布局
+	- 根据三级缓存策略实现了一个简易的ImageLoader
 
 	<figure class="half">
         <img src="/images/dbb1.gif" />
