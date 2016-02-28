@@ -11,8 +11,6 @@ image:
 
 {% include _toc.html %}
 
-编辑于2016/2/28，pdf文档版
-
 #基本情况
 
 - 王坚/男/1994
@@ -43,15 +41,15 @@ image:
 - 自定义ViewGroup实现图书标签的流式布局
 - 实现了一个简易的ImageLoader
 
-	<div class='row'>
-        <img src="/images/dbb1.gif" width="300px" style='border: #f1f1f1 solid 1px'/>
-		<img src="/images/dbb2.gif" width="300px" style='border: #f1f1f1 solid 1px'/>
-    </div>
+	<figure class="half">
+        <img src="/images/dbb1.gif" />
+		<img src="/images/dbb2.gif"/>
+    </figure>
 
-	<div class='row'>
-        <img src="/images/dbb3.gif" width="300px" style='border: #f1f1f1 solid 1px'/>
-		<img src="/images/dbb4.gif" width="300px" style='border: #f1f1f1 solid 1px'/>
-    </div>
+	<figure class="half">
+        <img src="/images/dbb3.gif" />
+		<img src="/images/dbb4.gif"/>
+    </figure>
 
 #自我评价
 
@@ -59,6 +57,7 @@ image:
 - 热爱编程，能长久保持对开发工作的激情。
 
 #校内职务
+
 - 体育委员
 	- 广播操比赛一等奖，
 	- 院级篮球赛第一名，
