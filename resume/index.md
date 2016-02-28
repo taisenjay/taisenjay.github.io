@@ -9,8 +9,6 @@ image:
   creditlink: http://wegraphics.net/downloads/free-ultimate-blurred-background-pack/
 ---
 
-{% include _toc.html %}
-
 #基本情况
 
 - 王坚/男/1994
@@ -32,6 +30,7 @@ image:
 #项目经验
 	
 ##豆瓣图书
+
 [源码地址(内含apk)](http://taisenjay.com/files/DoubanBooks.zip)
 
 - 利用豆瓣提供的API获取用户搜索的相关图书信息的json数据，在App中用ListView呈现
