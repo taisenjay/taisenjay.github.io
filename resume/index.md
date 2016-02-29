@@ -37,15 +37,15 @@ image:
 	- 自定义ViewGroup实现图书标签的流式布局
 	- 根据三级缓存策略实现了一个简易的ImageLoader
 
-	<figure class="half">
-        <img src="/images/dbb1.gif" />
-		<img src="/images/dbb2.gif"/>
-    </figure>
+ 	<div class='row'>
+        <img src='/images/dbb1.gif' width="112px" height="200px" style='border: #f1f1f1 solid 1px'/>
+        <img src='/images/dbb2.gif' width="112px" height="200px"style='border: #f1f1f1 solid 1px'/>
+    </div>
 
-	<figure class="half">
-        <img src="/images/dbb3.gif" />
-		<img src="/images/dbb4.gif"/>
-    </figure>
+	<div class='row'>
+        <img src='/images/dbb3.gif' width="112px" height="200px" style='border: #f1f1f1 solid 1px'/>
+        <img src='/images/dbb4.gif' width="112px" height="200px"style='border: #f1f1f1 solid 1px'/>
+    </div>
 
 <font size='6'>自我评价</font>
 
