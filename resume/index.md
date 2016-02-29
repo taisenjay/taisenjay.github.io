@@ -40,9 +40,6 @@ image:
 	<div class='row'>
         <img src='/images/dbb1.gif' width="112px" height="200px" style='border: #f1f1f1 solid 1px'/>
         <img src='/images/dbb2.gif' width="112px" height="200px" style='border: #f1f1f1 solid 1px'/>
-    </div>
-
-	<div class='row'>
         <img src='/images/dbb3.gif' width="112px" height="200px" style='border: #f1f1f1 solid 1px'/>
         <img src='/images/dbb4.gif' width="112px" height="200px"style='border: #f1f1f1 solid 1px'/>
     </div>
