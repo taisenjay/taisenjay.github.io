@@ -15,7 +15,7 @@ image:
 往优秀Android开发者的路上缓缓前行…………
 
 
-##About Blog
+## About Blog
 
 记录自己学习和生活的点点滴滴……
 
