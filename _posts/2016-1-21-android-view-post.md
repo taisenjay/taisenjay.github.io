@@ -22,7 +22,7 @@ View的绘制主要涉及三个方法：onMeasure（）、onLayout（）和onDra
 - public boolean onTouchEvent（MotionEvent ev）在dispatchTouchEvent方法中调用，用来处理点击事件，返回结果表示是否消耗当前事件，如果不消耗，则在同一个时间序列中，当前View无法再次接收到事件。
 
 这三个方法的关系可以用伪代码来表示：
-
+    
 {% highlight java %}
 
      public  boolean  dispatchTouchEvent(MotionEvent ev){
