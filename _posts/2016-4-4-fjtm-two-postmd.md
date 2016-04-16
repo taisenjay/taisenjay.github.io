@@ -37,4 +37,33 @@ ListView加载时会根据数据的个数来创建itemView,每个Item View通过
 
 Android采用视图复用原则来创建Item View，比如某个ListView中只需8个Item View就能铺满屏幕，那么即使有100个数据项需要展示，那么也只会创建8个Item View。当屏幕向下滑动时，第一项不可见后，就会进入ListView的Recycler中，Recycler会将该视图缓存。
 
-当数据源发生变化后，通过Adapter的notifyDataSetChanged（）方法来更新。
+当数据源发生变化后，通过Adapter的notifyDataSetChanged（）方法来更新。GridView和ListView相似，同一个Adapter可以设置给ListView和GridView。
+
+## 1.2、RecyclerView ##
+
+ListView和GridView基本上只有布局方式不一样，其他机制基本一样。RecyclerView就是作为ListView和GridView的替代者实现的。
+
+RecyclerView也使用Adapter,不过该Adapter是RecyclerView的静态内部类，该Adapter还有一个泛型参数VH，代表ViewHolder（该类中有一个item view字段，代表每一项数据的根视图，需要在构造函数中传递给ViewHolder对象）。用户需要实现的函数有：
+
+- onCreateViewHolder()(告诉RecyclerView每项数据是怎样的)
+- onBindViewHolder()（将数据绑定）
+- getItemCount()(告诉RecyclerView有多少项数据)。
+
+RecyclerView亮点->将布局抽象为LayoutManager:
+
+- LinearLayoutManager，线性布局
+- GridLayoutManager，网格布局
+- StaggeredGridLayoutManager，交错网格布局
+- 定制布局管理器实现自定义布局
+
+除此之外，RecyclerView还可以通过ItemDecotation为Item View添加装饰；也可以通过ItemAnimator为Item View添加动画。
+
+## 1.3、ViewPager ##
+
+主要应用场景：与Fragment配合使用，实现滑动页面进行页面导航
+
+常用FragmentPagerAdapter来实现。
+
+[<font color="red">网易新闻客户端Tab</font>](http://blog.csdn.net/xiaanming/article/details/10766053)
+
+# 2、自定义控件 #
