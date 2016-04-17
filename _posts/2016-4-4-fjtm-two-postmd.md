@@ -67,3 +67,49 @@ RecyclerView亮点->将布局抽象为LayoutManager:
 [<font color="red">网易新闻客户端Tab</font>](http://blog.csdn.net/xiaanming/article/details/10766053)
 
 # 2、自定义控件 #
+
+自定义View类型：
+
+- 继承自View完全自定义
+- 继承现有控件（如ImageView）实现特定效果
+- 继承自ViewGroup实现布局
+
+自定义View的重点有View的测量与布局、View的绘制、处理触摸事件、动画等。
+
+## 2.1、自定义View ##
+
+继承自View完全实现自定义控件是最自由的一种实现，但是也相对复杂。你需要正确地测量View的尺寸，并且手动绘制各种视觉效果。
+
+对于继承自View类的自定义控件来说，核心的步骤分别为尺寸测量与绘制，对应的函数式onMeasure、onDraw。因为View类型的子类也是视图树的叶子结点，因此其只需负责绘制好自身内容即可。
+
+实现过程：
+
+- 继承自View创建自定义控件
+- 如有需要自定义View属性，也就是在values/attrs.xml中定义属性集
+- 在xml中引入命名空间，设置属性
+- 在代码中读取xml中的属性，初始化视图
+- 测量视图大小
+- 绘制视图内容
+
+## 2.2、View的尺寸测量 ##
+
+在Android中，视图树在创建时会调用根视图的measure（测量）、layout（布局）、draw（绘制）三个函数。其中对于非ViewGroup的View而言，不需要layout。
+
+视图树渲染时，系统的绘制流程会从ViewRoot的PerformTraversals()中开始，在其内部调用measure（widthMeasureSpec,heightMeasureSpec）方法,这两个参数分别用于确定视图的宽度、高度的规格和大小。MeasureSpec的值由specSize（规格）和specMode（大小）共同组成。
+
+SpecMode（模式）类型：
+
+- EXACTLY，表示父视图希望子视图的大小由specSize的值确定（<font color="green">系统默认会按照此规则来设置子视图大小</font>）。<font color="red">match_parent和具体数值（如20dp）</font>对应这个模式。
+- AT_MOST，表示子视图最大只能是specSize中指定的大小（<font color="green">系统默认会按照此规则来设置子视图大小</font>）。一般情况，<font color="red">wrap_content对应这种模式</font>。
+- UNSPECIFIED，表示开发人员完全自由设置视图的大小，没有任何限制。这种情况很少见，基本不常用。
+
+MeasureSpec的来源：ViewRootImpl（视图树控制类）的measureHierarchy函数会通过getRootMeasureSpec()方法来获取widthMeasureSpec和heightMeasureSpec。构建完根视图的MeasureSpec后会执行performMeasure函数从根视图开始一层一层测量视图的大小，最终调用setDimension函数设置该视图的大小。
+
+## 2.3、Canvas与Paint ##
+
+对于Android来说，整个View就是一张画布（Canvas），开发者可以通过Paint（画笔）在这张画布上绘制各种各样的图形、元素，例如矩形、圆形、椭圆、文字、圆弧、图片等。需要注意Canvas类的save（保存画布状态）和restore（恢复到上一个保存的画布状态）函数，应用在画布进行了平移，缩放，旋转，倾斜、裁剪等操作后。
+
+## 2.4、自定义ViewGroup ##
+
+自定义ViewGroup是另一种重要的自定义View形式，不同在于，开发者还需要实现onLayout方法（将ViewGroup下中包含的View进行合理布局）。
+
