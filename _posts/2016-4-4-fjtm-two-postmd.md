@@ -113,3 +113,48 @@ MeasureSpec的来源：ViewRootImpl（视图树控制类）的measureHierarchy�
 
 自定义ViewGroup是另一种重要的自定义View形式，不同在于，开发者还需要实现onLayout方法（将ViewGroup下中包含的View进行合理布局）。
 
+## 3、Scroller的使用 ##
+
+Scroller是一个帮助View滚动的辅助类。Scroller 封装了滚动时间、要滚动的目标x轴和y轴，以及在每个时间内View应该滚动到的（x,y）轴的坐标点。
+
+示例：
+
+{% highlight java %}
+
+     public void ScrollLayout extends FrameLayout{
+		private String TAG = ScrollLayout.class.getSimpleName();
+		Scroller mScroller;
+		
+		public ScrollLayout(Context context ){
+			super(context);
+			mScroller = new Scroller(context);
+		}
+
+		//该函数会在View重绘时被调用
+		@Override
+		public void computeScroll(){
+			if(mScroller.computeScrollOffset()){
+				//滚动到此，View应该滚动到的x,y坐标上
+				this.scrollTo(mScroller.getCurX(),mScroller.getCurrY());
+				//请求重绘该View，从而又会导致computeScroll被调用，然后继续滚动，直到
+				//computeScrollOffset返回false
+				this.postInvalidate();
+			}
+		}
+
+		//调用这个方法进行滚动，这里我们只滚动竖直方向
+		public void scrollTo(int y){
+			//参数1和2分别为滚动的起始点的水平、竖直方向的滚动偏移量
+			//3和4为水平和竖直方向上滚动的距离
+			mScroller.startScroll(getScrollX(),getScrollY(),0,y);
+			this.invalidate();
+		}
+	 }
+
+	//调用代码
+	ScrollLayout scrollView = new ScrollLayout(getContext());
+	scrollView.scrollTo(100);
+{% endhighlight %}
+
+示例代码分析：首先调用scrollTo(int y),然后在该方法中通过mScroller.startScroll（）方法来设置滚动的参数，再调用invalidate()方法使得该View重绘。重绘时会调用computeScroll(),在该方法中通过mScroller.computeScrollOffset（）判断滚动是否完成，如果返回true，代表没有滚动完成，此时把该View滚动到此刻应该滚动的x,y位置，这个位置通过mScroller的getCurrX和getCurrY获得。然后继续调用重绘方法，继续执行滚动过程，直至滚动完成。
+

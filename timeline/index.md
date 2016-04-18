@@ -12,7 +12,11 @@ image:
 
 
 
-- 2015/9/18 搭建Blog
+- 2015/9/18 JayBlog的生日
+- 2016/3/22 上班第一天
+<figure>
+	<img src="/images/timeline/tl_work.jpg">
+</figure>
 
 
 
