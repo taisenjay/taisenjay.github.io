@@ -119,7 +119,7 @@ Scroller是一个帮助View滚动的辅助类。Scroller 封装了滚动时间�
 
 示例：
 
-{% highlight java %}
+{% highlight Java %}
 
      public void ScrollLayout extends FrameLayout{
 		private String TAG = ScrollLayout.class.getSimpleName();
@@ -158,3 +158,79 @@ Scroller是一个帮助View滚动的辅助类。Scroller 封装了滚动时间�
 
 示例代码分析：首先调用scrollTo(int y),然后在该方法中通过mScroller.startScroll（）方法来设置滚动的参数，再调用invalidate()方法使得该View重绘。重绘时会调用computeScroll(),在该方法中通过mScroller.computeScrollOffset（）判断滚动是否完成，如果返回true，代表没有滚动完成，此时把该View滚动到此刻应该滚动的x,y位置，这个位置通过mScroller的getCurrX和getCurrY获得。然后继续调用重绘方法，继续执行滚动过程，直至滚动完成。
 
+[<font color="blue">下拉刷新组件实现</font>](https://github.com/hehonghui/android_my_pull_refresh_view)
+
+# 4、让应用更精彩——动画 ##
+
+动画分类：帧动画、补间动画（最早），属性动画（Android3.0之后），Vector Drawable（Android5.0）
+动画实质：在指定的时间内持续的修改某个属性的值，使该值在指定取值范围内平滑的过渡。
+
+## 4.1、帧动画 ##
+
+Frame动画（帧）是一系列图片按照一定的顺序展示的过程（类似于放电影）。
+实现方式：1、在xml中定义；2、在Java代码中实现。
+
+在xml中实现：放置在/res目录下的anim目录或drawable目录下，必须由<animation-list>元素作为根元素，其可以包含一个或多个<item>元素。andorid:onshot如果定义为true的话表示此动画只会执行一次，false则循环。<item>元素代表一帧动画，android:drawable指定此帧对应的图片，android:duration代表此帧持续的时间，单位为毫秒。
+
+示例(hear_anim.xml)：
+
+{% highlight xml %}
+	
+	<animation-list xlmns:andrid="http://…………………………"
+			android:oneshot="true">
+		<item
+			android:duration="500"
+			android:drawable="@drawable/ic_heart_0">
+		<item
+			android:duration="500"
+			android:drawable="@drawable/ic_heart_1">
+		<item
+			android:duration="500"
+			android:drawable="@drawable/ic_heart_2">
+		<item
+			android:duration="500"
+			android:drawable="@drawable/ic_heart_3">
+		<item
+			android:duration="500"
+			android:drawable="@drawable/ic_heart_4">
+	</animation-list>
+{% endhighlight %}
+
+再将该动画xml设置给某个View，比如：
+
+{% highlight xml %}
+	
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@drawable/heart_anim"/>
+{% endhighlight %}
+
+但是动画并不会在View显示时自动播放，还需要通过代码启动
+
+{% highlight Java %}
+	
+	((AnimationDrawable)mImageView.getBackground()).start();
+{% endhighlight %}
+
+当然，也可以完全用代码实现帧动画：
+
+{% highlight Java %}
+	
+	AnimationDrawable anim = new AnimationDrawable();
+	for (int i=0;i<=4;i++){
+		//获取图片的资源id
+		int id = getResources().getIdentifier("ic_heart_"+ 	i,"drawble",getPackageName());
+		Drawable drawable = getResources().getDrawable(id);
+		//将Drawable添加到帧动画中
+		anim.addFrame(drawable,300);
+	}
+	anim.setOneShot(false);
+	//将动画设置为ImageView的背景
+	mImageView.setBackgroundDrawable(anim);
+	anim.start();
+{% endhighlight %}
+
+## 4.2、补间动画 ##
+
+tween（补间）动画是操作某个控件让其展现出旋转、渐变、移动、缩放的一种转换过程。
