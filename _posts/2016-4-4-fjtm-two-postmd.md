@@ -234,3 +234,74 @@ Frame动画（帧）是一系列图片按照一定的顺序展示的过程（类
 ## 4.2、补间动画 ##
 
 tween（补间）动画是操作某个控件让其展现出旋转、渐变、移动、缩放的一种转换过程。
+
+xml实现：
+<set>为根节点（对应Java类-AnimationSet），<set>的属性有android:interpolator(代表一个插值器资源)，android:shareInterpolator代表<set>里面的多个动画（有<alpha><scale><translate><rotate>）是否共享插值器，默认为true。
+
+- <alpha>(Java对应类：AlphaAnimation)渐变动画
+	- android:fromAlpha:起始alpha值（浮点值，范围在0.0——1.0）
+	- adnroid:toAlpha:结尾alpha值
+
+- <scale>（Java对应类：ScaleAnimation）缩放动画
+	- android:fromXScale:起始X方向上相对自身的缩放比例（浮点值，1.0代表无变化，0.5代表缩小一倍，2.0代表放大一倍）
+	- android:toXScale:结尾X方向上相对自身的缩放比例
+	- android:fromYScale:起始y方向上相对自身的缩放比例（浮点值，1.0代表无变化，0.5代表缩小一倍，2.0代表放大一倍）
+	- android:toYScale:结尾y方向上相对自身的缩放比例
+	- android:pivotX:缩放的中轴点的X坐标
+	- android:pivotY:缩放的中轴点的Y坐标
+
+- <translate>（Java对应类：TranslateAnimation）位移动画
+	- android:fromXDelta:起始X方向的位置（支持3种单位：浮点，num%，num%p）
+	- android:toXDelta:结尾X方向的位置
+	- android:fromYDelta:起始Y方向的位置
+	- android:toYDelta:结尾Y方向的位置 
+
+- <rotate>(Java对应类：RotateAnimation)旋转动画
+	- android:fromDegrees:起始角度（浮点值，度）
+	- android:toDegrees:结尾角度（浮点值，度）
+	- android:pivotX:旋转的中轴点的X坐标（支持3种单位：浮点，num%，num%p）
+	- android:pivotY:旋转的中轴点的Y坐标 
+
+## 4.3、属性动画 ##
+
+属性动画（不仅限于移动，缩放，旋转，淡入淡出）不是针对View来设计的，不再只是一种视觉上的效果。	其实际上是真正的在一定时间段内不断修改某个对象的某个属性值的机制。我们需要告诉系统动画操作的属性，动画时长，哪种动画，以及动画的初始结束值。
+
+### 4.3.1、属性动画的核心类——ValueAnimator ###
+
+ValueAnimator：
+
+- 作用：在一定时间内不断修改对象的某个属性值
+- 原来：内部使用一种时间循环的机制来计算值与值之间的动画过渡
+- 使用：将属性的取值范围、运行时长提供给ValueAnimator
+- 此外：其还负责管理动画的播放次数、播放模式，以及对动画设置监听
+
+通常我们通过ofFloat，ofInt等静态工厂函数构建ValueAnimator，示例：
+
+{% highlight Java %}
+
+		private void startValueAnimation(){
+			ValueAnimator animator = ValueAnimator.ofFloat(0.0f,1.0f);
+			animator.setDuration(1000);
+			animator.addUpdateListener(mAnimationListener);
+		}
+		ValueAnimator.AnimatorUpdateListener mAnimationListener = new
+				ValueAnimator.AnimatorUpdateListener(){
+			@Override
+			public void onAnimationUpdate(ValueAnimator animation){
+				float newValue = animation.getAnimatedValue();
+				Log.e("","### 新的属性值： "+ newValue)；
+			}
+		};
+		
+{% endhighlight %}
+
+也可以在res/anim目录下的xml文件中定义该动画，然后在代码中获取：
+
+{% highlight Java %}
+
+		ValueAnimator animator = AnimatorInflater.loadAnimator	(getApplicationContext(),R.anim.value_animator);
+		
+{% endhighlight %}
+
+
+
