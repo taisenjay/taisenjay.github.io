@@ -289,6 +289,9 @@ ValueAnimator：
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation){
 				float newValue = animation.getAnimatedValue();
+				//将不断变化的属性数值设置给具体的View
+				//这里设置的是alpha(透明度)这个属性（此动画完成了透明度从0.0过渡到1.0的效果）
+				myView.setAlpha(newValue);
 				Log.e("","### 新的属性值： "+ newValue)；
 			}
 		};
@@ -297,11 +300,82 @@ ValueAnimator：
 
 也可以在res/anim目录下的xml文件中定义该动画，然后在代码中获取：
 
-{% highlight Java %}
+{% highlight %}
+		//R.anim.value_animator
+		<animator xmlns: ……
+			android:valueFrom="0.0"
+			android:valueTo="1.0"
+			android:valueType="floatType"/>		
 
 		ValueAnimator animator = AnimatorInflater.loadAnimator	(getApplicationContext(),R.anim.value_animator);
 		
 {% endhighlight %}
 
+### 4.3.2、对任意属性进行动画操作——ObjectAnimator ###
 
+ValueAnimator功能强大，自由度高，但是使用起来效率较低，。实际开发中用的更多的应该是ObjectAnimator。
+ObjectAnimator是ValueAnimator的子类，其功能强大，能够操作任意对象的任意属性。
 
+{% highlight java %}
+
+	ObjectAnimator animator = ObjectAnimator.ofFloat(myView,"alpha",1.0f,0.3f,0.7f);
+	animator.setDuration(2000);
+	animator.start();
+{% endhighlight %}
+
+### 4.3.3、实现丰富多彩的动画效果——AnimatorSet ###
+
+AnimatorSet将多个动画组合起来。AnimatorSet提供一个play(Animator)方法，然后返回一个AnimatorSet.Builder的实例，AnimatorSet.Builder有以下5个核心方法：
+
+- after(Animator anim)：前一个动画执行完后再执行这个动画
+- after(long delay)：前一个动画执行完后延迟指定毫秒数
+- before(Animator anim):在anim动画执行完之前再执行调用after函数的动画
+- with(Animator anim):将现有动画和传入的动画同时执行
+- playTogether(Animator…… anims):将多个动画一起执行
+
+示例：
+
+{% highlight java %}
+
+	AnimatorSet animSet = new AnimatorSet();
+	animSet.play(anim1).with(anim2).after(anim3);
+	animSet.setDuration(2000);
+	animSet.start();
+{% endhighlight %}
+
+### 4.3.4、动画执行时间——TypeEvaluator与TimeInterpolator ###
+
+TypeEvalutor：根据当前动画已执行时间占总时间的百分比来计算新的属性值。
+
+核心方法：public abstract T evaluate(float fraction,T startValue,T endValue)
+参数1：已执行时间占总时间的百分比（0.0——1.0），参数2：属性的起始值，参数3：属性的最终值
+
+示例：
+
+{% highlight java %}
+
+	//实现
+	public class TranslateXEvalutor implements TypeEvaluator<Integer>{
+		@Override
+		public Integer evaluate(float fraction,Integer startValue,Integer endValue){
+			//计算新的属性值
+			int newValue = startValue + (int)(fraction + (endvalue - startValue));
+			return newValue;
+		}	
+	}
+	//使用
+	private void useCustomEvaluator(){
+		ObjectAnimator animator = ObjectAnimator.ofObject(mView,"x",new TranslateXEvaluator(),0,200);
+		animator.setDuration(500);
+		animator.start();
+	}
+{% endhighlight %}
+
+TimeInterpolator:修改动画已执行时间与总时间的百分比，也就是fraction参数值。
+
+- LinearInterpolator：匀速线性插值
+- AccelerateInterpolator:加速插值器
+- DecelerateInterpolator:减速插值器
+- AccelerateDecelerateInterpolator：加减速插值器
+
+过程：在获得已执行时间百分比之后，通过调用TimeInterpolator的getInterpolation函数来对该百分比做出修改，并且返回。
