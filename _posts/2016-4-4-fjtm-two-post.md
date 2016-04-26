@@ -300,7 +300,7 @@ ValueAnimator：
 
 也可以在res/anim目录下的xml文件中定义该动画，然后在代码中获取：
 
-{% highlight %}
+{% highlight xml %}
 		//R.anim.value_animator
 		<animator xmlns: ……
 			android:valueFrom="0.0"
