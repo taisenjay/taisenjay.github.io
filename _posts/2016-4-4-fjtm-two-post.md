@@ -266,7 +266,7 @@ xml实现：
 
 属性动画（不仅限于移动，缩放，旋转，淡入淡出）不是针对View来设计的，不再只是一种视觉上的效果。	其实际上是真正的在一定时间段内不断修改某个对象的某个属性值的机制。我们需要告诉系统动画操作的属性，动画时长，哪种动画，以及动画的初始结束值。
 
-### 4.3.1、属性动画的核心类——ValueAnimator ###
+## 4.3.1、属性动画的核心类——ValueAnimator ##
 
 ValueAnimator：
 
@@ -311,7 +311,7 @@ ValueAnimator：
 		
 {% endhighlight %}
 
-### 4.3.2、对任意属性进行动画操作——ObjectAnimator ###
+## 4.3.2、对任意属性进行动画操作——ObjectAnimator ##
 
 ValueAnimator功能强大，自由度高，但是使用起来效率较低，。实际开发中用的更多的应该是ObjectAnimator。
 ObjectAnimator是ValueAnimator的子类，其功能强大，能够操作任意对象的任意属性。
@@ -323,7 +323,7 @@ ObjectAnimator是ValueAnimator的子类，其功能强大，能够操作任意�
 	animator.start();
 {% endhighlight %}
 
-### 4.3.3、实现丰富多彩的动画效果——AnimatorSet ###
+## 4.3.3、实现丰富多彩的动画效果——AnimatorSet ##
 
 AnimatorSet将多个动画组合起来。AnimatorSet提供一个play(Animator)方法，然后返回一个AnimatorSet.Builder的实例，AnimatorSet.Builder有以下5个核心方法：
 
@@ -343,7 +343,7 @@ AnimatorSet将多个动画组合起来。AnimatorSet提供一个play(Animator)�
 	animSet.start();
 {% endhighlight %}
 
-### 4.3.4、动画执行时间——TypeEvaluator与TimeInterpolator ###
+## 4.3.4、动画执行时间——TypeEvaluator与TimeInterpolator ##
 
 TypeEvalutor：根据当前动画已执行时间占总时间的百分比来计算新的属性值。
 
