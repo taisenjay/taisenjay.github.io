@@ -27,7 +27,18 @@ main执行后，应用程序开始启动，并且一直从消息队列中取消�
 
 Handler在Android中最常用的功能之一是将一个消息（比如在子线程中执行完耗时操作，然后需要更新UI）post到UI线程中，然后在Handler的handleMessage方法中进行处理。但是，该Handler必须在主线程中创建。这是因为每个Handler都会关联一个消息队列（这一点很好理解，Handler就是一个消息队列处理器，专门处理与它关联的消息队列中消息），消息队列被封装在Looper中，而每个looper又会关联一个线程，一句话总结就是每个消息队列关联一个线程。
 
-默认情况下，消息队列只有一个，即主线程的消息队列，这个消息队列就是在ActivityThread的main方法中调用Looper.prepareMainLooper()创建的。
+默认情况下，消息队列只有一个，即主线程的消息队列，这个消息队列就是在ActivityThread的main方法中调用Looper.prepareMainLooper()创建的。消息队列通过Looper与线程关联上，而Handler又与Looper关联，因此Handler最终就和线程、线程的消息队列关联上了。因此，更新UI的Handler必须要在主线程中创建，Handler要与主线程的消息队列关联上，这样handleMessage才会执行在UI线程，此时更新UI才是线程安全的。
+
+通过Handler向消息队列发送消息的两种方式：1、post（Runnable runnable）2、sendMessage（）
+
+## 1.2、在子线程中创建Handler为何会抛出异常 ##
+
+Looper对象是ThreadLocal的，即每个线程都有自己的Looper，除了主线程默认创建了Looper外，其他子线程默认不会创建Looper，所以在子线程中创建Handler会抛出异常，所以在子线程中使用Handler需要通过Looper.prepare（）来创建Looper，并通过Looper.loop()来启动循环。这样该线程就有了自己的Looper也就有了自己的消息队列。
+
+# 2、Android中的多线程 #
+
+
+
 
 
 
