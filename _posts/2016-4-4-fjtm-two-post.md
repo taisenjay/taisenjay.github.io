@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "创造丰富多彩的UI-View与动画"
-excerpt: "《Android开发进阶：从小工到专家》第二章笔记"
+excerpt: "《Android开发进阶：从小工到专家》第2章读书笔记"
 tags: [读书笔记，从小工到专家]
 comments: true
 ---

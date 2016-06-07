@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "保证App流畅的关键因素——多线程"
-excerpt: "《Android开发进阶：从小工到专家》第三章笔记"
+excerpt: "《Android开发进阶：从小工到专家》第3章读书笔记"
 tags: [读书笔记，从小工到专家]
 comments: true
 ---
@@ -81,6 +81,16 @@ Looper对象是ThreadLocal的，即每个线程都有自己的Looper，除了主
 * 闭锁CountDownLatch,同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待，直到条件满足。
 
 ## 2.7、创建异步任务更简单——AsyncTask的原理 ##
+
+AsyncTask使用：
+* execute(Params…… params),执行一个异步任务
+* onPreExecute(),execute后立即执行，调用在UI线程
+* doInBackground(Params…… params),执行耗时操作，接收输入参数和返回结果，执行时可调用publishProgress(Progress…… values)
+* onProgressUpdate(Progress…… values),执行在UI线程
+* onPostExecute(Result result),执行在UI线程，后台操作结束后，此方法调用，doInBackground方法的返回值作为其参数传入
+
+AsyncTask基本原理
+调用execute方法后，execute会调用onPreExecute方法，然后由ThreadPoolExecutor实例sExecutor执行一个FutureTask任务，这个过程中doInBackground将被调用，如果被开发者覆写的doInBackground方法中调用了publishProgress方法，sHandler处理消息时onProgressUpdate方法将被调用；如果遇到异常，则发送一条MESSAGE_POST_CANCEL的消息，取消任务，sHandler处理消息时onCancelled方法将被调用：如果执行成功，则发送一条MESSAGE_POST_RESULT的消息，sHandler处理消息时会调用onPostExecute方法让用户得以在UI线程处理结果。
 
 
 

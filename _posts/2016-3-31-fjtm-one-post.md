@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Android的构成基石——四大组件"
-excerpt: "《Android开发进阶：从小工到专家》第一章笔记"
+excerpt: "《Android开发进阶：从小工到专家》第1章读书笔记"
 tags: [读书笔记，从小工到专家]
 comments: true
 ---
