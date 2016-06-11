@@ -28,3 +28,20 @@ comments: true
 * POST，起初用来向服务器传送数据。通常会用来提交HTML的表单。也能实现GET的功能，区别是参数不放到URL中，而是请求体中
 * PUT，与GET相反，向服务器写入资源
 * DELETE，请服务器删除请求URL所指定的资源
+
+## 1.2、HTTP报文格式解析
+
+不同的请求方式，请求格式也不同。请求格式就是我们所说的报文格式。通常，一个HTTP请求报文由请求行、请求头部、空行和请求数据4个部分组成。
+
+HTTP响应报文也由3个部分组成，分别是：状态行、消息报头、响应正文。
+
+## 2、Android中执行网络请求 ##
+
+两种执行网络请求方式：Apache的HttpClient和Java的HttpURLConnection。、
+
+Android2.2之前，HttpClient的Bug较少，而HttpURLConnection的Bug较多。在Android2.3之后，
+HttpURLConnection是最佳选择，API简单、体积小是它的优点，其压缩和缓存机制可以有效减少流量消耗。在Android6.0中，HttpClient库已经被移除。
+
+在开发过程中，网络模块是最基础的一部分。流行网络框架有Volley、OkHttp等。
+
+
