@@ -43,3 +43,33 @@ Android中使用数据库事务可以大幅提升速度：
 不适用事务：插入1000条数据，执行过程重复1000次；
 使用事务：创建事务->执行1000条语句->提交，一次完成。
 缺点是，同一事务内的所有修改要么都完成，要么都不做，一条修改失败，就会自动回滚使所有修改不生效。
+
+## 3.3、Android中的数据库升级 ##
+
+修改数据表，比如给原来的表增加一个字段，必须修改版本号（往上升级）。版本号变大后，onUpgrade才会被调用。
+
+# 4、数据库框架ActiveAndroid
+
+* 在AndroidManifest中配置数据库名和版本号
+* 在Application类中初始化ActiveAndroid
+
+使用示例：
+{% highlight java %}
+
+	@Table (name = "students")
+	public class Student extends Model{
+		@Column(name="sid",unique=true)
+		public long id;
+		@Column
+		public String name
+		@Column
+		public String tel_no
+		@Column
+		public int cls_id;
+	}
+
+{% endhighlight %}
+
+调用Model对象的save方法就会将实体类中的数据存储到表中。
+
+ActiveAndroid实际的核心就是通过注解与反射将Model类型中的字段与SQL语句建立一个双向关系，然后在查询时将数据从Cursor映射到Model的字段中，而在插入是则将Model中的字段值转换为SQL语句，最后提交到数据库中执行。但是ActiveAndorid通过运行时注解与反射的形式实现数据库引擎效率并不是最高，更高效的实现是通过编译时注解，在编译时生成辅助类，通过这些辅助类完成数据库，表的创建以及Model与SQL之间的映射。利用编译时注解的数据库开源框架有GreenDao以及DBFlow.
