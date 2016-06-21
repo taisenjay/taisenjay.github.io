@@ -18,6 +18,12 @@ image:
 	<img src="/images/timeline/tl_work.jpg">
 </figure>
 
+- 2016/6/21 再见，我的大学
+<figure class="half">
+	<img src="/images/timeline/break.jpg">
+	<img src="/images/timeline/up.jpg">
+</figure>
+
 
 
 
