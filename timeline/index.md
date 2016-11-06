@@ -10,18 +10,16 @@ image:
 ---
 
 
-
-
-- 2015/9/18 JayBlog的生日
-- 2016/3/22 上班第一天
-<figure>
-	<img src="/images/timeline/tl_work.jpg">
-</figure>
-
 - 2016/6/21 再见，我的大学
-<figure >
-	<img src="/images/timeline/break_up.jpg">
-</figure>
+  <figure >
+  <img src="/images/timeline/break_up.jpg">
+  </figure>
+- 2016/3/22 上班第一天
+  <figure>
+  <img src="/images/timeline/tl_work.jpg">
+  </figure>
+
+
 
 
 

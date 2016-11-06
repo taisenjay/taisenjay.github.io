@@ -1,6 +1,6 @@
 # Site wide configuration
 
-title:            JayBlog
+title:            My Blog
 locale:           en_US
 url:
 
@@ -26,9 +26,9 @@ kramdown:
 
 # Site owner
 owner:
-  name: Taisenjay
+  name: JamesDReinhard
   avatar: bio-photo.jpg
-  bio: "革命尚未成功，同志仍需努力"
+  bio: "你必须非常努力，才能看起来毫不费力"
   email: taisenjay@gmail.com
   disqus-shortname: tsj
   twitter: taisenjay
