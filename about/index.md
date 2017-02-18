@@ -10,14 +10,11 @@ image:
   creditlink: http://wegraphics.net/downloads/free-ultimate-blurred-background-pack/
 ---
 
+一个爱小说爱篮球，却好久没看小说没打篮球，身体每况愈下的蛋疼青年。正与潜伏在
 
-一个爱小说爱运动，却好久没有看小说且身体每况愈下的蛋疼青年，正在通
-往优秀攻城狮的路上缓缓前行…………
+自己身体里的邪恶懒神做着艰苦斗争，且正在通往优秀攻城狮的路上缓缓前行…………
 
 
-## About Blog
-
-记录自己学习和生活的点点滴滴……
 
 ## About Life,About Career 
 

@@ -43,6 +43,6 @@ Looper提供的方法：
 - quit（）：直接退出Looper
 - quitSafely（）：设定退出标记，在把消息队列中的已有消息处理完毕后安全退出（注：Looper退出后，通过Handler发生消息会失败，Handler的send方法会返回false。在子线程中，如果手动为期创建了Looper，那么在所有任务完成后应该退出Looper，否则子线程会一直处于等待状态，而退出Looper后，线程就会立即终止）
 - loop（）：loop方法是一个死循环，唯一跳出循环的方式是MessageQueue的next方法返回null。当Looper的quit方法被调用时，Looper就会调用MessageQueue的quit或quitSafely方法来通知消息队列退出，否则loop方法就会无限循环下去。loop方法会调用MessageQueue的next方法来获取新消息，而next是一个阻塞操作，当没有消息时，next方法会一直阻塞在那里，这也导致了loop方法一直阻塞。如果消息队列的next方法返回了新消息，Looper就会处理这条消息：msg.target.dispatchMessage(msg)，这里的msg.target是发送这条消息的Handler对象，这Handler发送的消息最终又交给它的dispatchMessage方法来处理了。但是这里不同的是，Handler发送的消息最终又交给它的dispatchMessage方法来处理了。但是这里不同的是，Handler的dispatchMessage方法是在创建Handler时所使用的Looper中执行的，这样就成功地将代码逻辑切换到指定的线程中去执行了。
-          
+  ​        
 Handler的工作主要包含信息的发送和接收过程。消息的发送可以通过post的一系列或者send的一系列方法，post的方法最终是通过send来实现的。Handler发送消息的过程就是向消息队列中插入一条消息，MessageQueue的next方法就会返回这条消息给Looper，Looper收到消息后就开始处理了，最终消息由Looper交由Handler处理，即Handler的dispatchMessage方法会被调用，这时Handler就进入了处理消息的阶段。
-     
+​     
