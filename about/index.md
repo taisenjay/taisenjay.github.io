@@ -10,7 +10,7 @@ image:
   creditlink: http://wegraphics.net/downloads/free-ultimate-blurred-background-pack/
 ---
 
-一个喜欢小说热爱篮球，每天都需要一瓶营养快线的蛋疼少年。
+一个喜欢小说热爱篮球，每天都需要一瓶营养快线的阳光少年。
 在独自与懒神抗争的日子里痛并快乐着... ...
 
 
