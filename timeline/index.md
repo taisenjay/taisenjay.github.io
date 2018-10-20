@@ -10,6 +10,10 @@ image:
 ---
 
 
+- 2018/10/20 好久没来这里了，时间过的真快
+  <figure >
+  <img src="/images/timeline/tl_wegene.jpg">
+  </figure>
 - 2016/6/21 再见，我的大学
   <figure >
   <img src="/images/timeline/break_up.jpg">
