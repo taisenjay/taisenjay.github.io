@@ -10,7 +10,7 @@ image:
 ---
 
 - 2019/7/19  程序员生涯的终结？
-  ![大数据](https://i.bmp.ovh/imgs/2019/07/ec97c7a219ae51ba.jpg)
+  ![大数据](https://i.bmp.ovh/imgs/2019/07/0339ef4846c61266.jpg)
 - 2018/10/20 好久没来这里了，时间过的真快
   <figure >
   <img src="/images/timeline/tl_wegene.jpg">
